@@ -3,6 +3,7 @@ package by.htp.library.dao;
 import by.htp.library.dao.exception.DAOException;
 import by.htp.library.entity.Book;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,4 +14,16 @@ public class DBBookOperationDAO extends OperationDAO implements BookOperationDAO
     public List<Book> checkSearch(String searching) throws DAOException {
         return null;
     }
+
+    @Override
+    public List<Book> getBook() throws DAOException {
+        List<Book> listBooks = null;
+        System.out.println("DAOFACTORY");
+        Factory factory = Factory.getInstance();
+        DBBookOperationDAO dbBookOperationDAO = (DBBookOperationDAO) factory.getBookOperationDAO();
+
+        listBooks.add((Book) dbBookOperationDAO.getBook());
+        return listBooks;
+    }
+
 }

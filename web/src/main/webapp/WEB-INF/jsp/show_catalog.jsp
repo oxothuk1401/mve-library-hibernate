@@ -30,7 +30,6 @@
 			<c:forEach var="book" items="${bookbean}">
 				<tr>
 					<td><c:out value="${ book.access }" /></td>
-					<td><c:out value="${ book.author }" /></td>
 					<td><c:out value="${ book.title }" /></td>
 					<td><c:out value="${ book.date }" /></td>
 					<td><c:out value="${ book.location }" /></td>

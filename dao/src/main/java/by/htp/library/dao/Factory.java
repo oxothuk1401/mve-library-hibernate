@@ -3,7 +3,7 @@ package by.htp.library.dao;
 public class Factory {
     private static final Factory instance = new Factory();
 
-    private BookOperationDAO bookOperationDAO = new DBBookOperationDAO();
+    private BookOperationDAO bookOperationDAO;
     private UserOperationDAO userOperationDAO = new DBUserOperationDAO();
     private AuthorOperationDAO authorOperationDAO = new DBAuthorOperationDAO();
 
@@ -15,6 +15,9 @@ public class Factory {
     }
 
     public BookOperationDAO getBookOperationDAO() {
+        if(bookOperationDAO == null){
+            bookOperationDAO= new DBBookOperationDAO();
+        }
         return bookOperationDAO;
     }
 

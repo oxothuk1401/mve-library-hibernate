@@ -13,6 +13,8 @@ public interface BookOperationDAO<T> {
 
     List<Book> checkSearch(String searching) throws DAOException;
 
+    List<Book> getBook() throws DAOException;
+
     T add(T t);
 
     T delete(T t);
