@@ -1,9 +1,11 @@
 package by.htp.library.dao;
 
 public class Factory {
-    private static Factory instance = new Factory();
+    private static final Factory instance = new Factory();
 
-    private SQLCommandDAO sqlCommandDAO = new SQLCommandDAO();
+    private BookOperationDAO bookOperationDAO = new DBBookOperationDAO();
+    private UserOperationDAO userOperationDAO = new DBUserOperationDAO();
+    private AuthorOperationDAO authorOperationDAO = new DBAuthorOperationDAO();
 
     private Factory() {
     }
@@ -12,8 +14,15 @@ public class Factory {
         return instance;
     }
 
-    public SQLCommandDAO getSqlCommandDAO() {
-        return sqlCommandDAO;
+    public BookOperationDAO getBookOperationDAO() {
+        return bookOperationDAO;
     }
 
+    public UserOperationDAO getUserOperationDAO() {
+        return userOperationDAO;
+    }
+
+    public AuthorOperationDAO getAuthorOperationDAO() {
+        return authorOperationDAO;
+    }
 }

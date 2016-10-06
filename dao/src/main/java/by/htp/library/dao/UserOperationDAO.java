@@ -1,23 +1,23 @@
 package by.htp.library.dao;
 
 import by.htp.library.dao.exception.DAOException;
-import by.htp.library.entity.Book;
 import by.htp.library.entity.User;
+import org.omg.CORBA.Object;
 
 import java.util.List;
 
-public interface CommonDAO {
+/**
+ * Created by oxothuk1401 on 07.10.2016.
+ */
+public interface UserOperationDAO<T> {
 
     User checkLogin(String login, String password) throws DAOException;
 
     boolean checkRegister(String number, String password) throws DAOException;
 
-    boolean deleteUser(String user) throws DAOException;
+    T delete(T t);
 
-    List<String> getUsers() throws DAOException;
+    Object get(int id);
 
-    List<Book> getBooks() throws DAOException;
-
-    List<Book> checkSearch(String searching) throws DAOException;
-
+    List<Object> getAll();
 }
