@@ -10,12 +10,9 @@ import by.htp.library.entity.Book;
 
 public final class ShowCatalogService {
 
-    public final static List<Book> showBooks(String showusers) throws DAOException {
-        System.out.println("hi");
+    public final static List<Book> showBooks() throws DAOException {
         Factory factory = Factory.getInstance();
         BookOperationDAO bookOperationDAO = factory.getBookOperationDAO();
-        List<Book> listBooks = bookOperationDAO.getBook();
-
-        return listBooks;
+        return bookOperationDAO.getBook();
     }
 }

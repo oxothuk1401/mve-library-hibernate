@@ -22,7 +22,6 @@
 
 			<tr bgcolor="#CCCCCC">
 				<td align="center"><strong>Доступ</strong></td>
-				<td align="center"><strong>Автор</strong></td>
 				<td align="center"><strong>Название</strong></td>
 				<td align="center"><strong>Дата публикации</strong></td>
 				<td align="center"><strong>Местонахождение</strong></td>

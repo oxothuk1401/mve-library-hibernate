@@ -20,7 +20,7 @@ public class ShowCatalog implements Command {
 		HttpSession session = request.getSession();
 		List<Book> list = null;
 		try {
-			list = ShowCatalogService.showBooks(null);
+			list = ShowCatalogService.showBooks();
 		} catch (DAOException e) {
 			e.getMessage();
 		}
