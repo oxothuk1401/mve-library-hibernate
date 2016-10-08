@@ -13,7 +13,6 @@ public interface AuthorOperationDAO<T> {
 
     T delete(T t);
 
-    Object get(int id);
 
-    List<Object> getAll();
+
 }

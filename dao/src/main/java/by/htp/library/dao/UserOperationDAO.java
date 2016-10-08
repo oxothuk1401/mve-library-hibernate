@@ -17,7 +17,5 @@ public interface UserOperationDAO<T> {
 
     T delete(T t);
 
-    Object get(int id);
 
-    List<Object> getAll();
 }

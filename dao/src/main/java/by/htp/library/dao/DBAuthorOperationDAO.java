@@ -5,4 +5,8 @@ package by.htp.library.dao;
  */
 public class DBAuthorOperationDAO extends OperationDAO implements AuthorOperationDAO {
 
+    @Override
+    public Class getPersistentClass() {
+        return null;
+    }
 }

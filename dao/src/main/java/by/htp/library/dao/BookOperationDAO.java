@@ -2,7 +2,7 @@ package by.htp.library.dao;
 
 import by.htp.library.dao.exception.DAOException;
 import by.htp.library.entity.Book;
-import org.omg.CORBA.Object;
+
 
 import java.util.List;
 
@@ -19,7 +19,5 @@ public interface BookOperationDAO<T> {
 
     T delete(T t);
 
-    Object get(int id);
 
-    List<Object> getAll();
 }
