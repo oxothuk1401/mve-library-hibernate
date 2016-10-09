@@ -25,6 +25,7 @@
 				<td align="center"><strong>Название</strong></td>
 				<td align="center"><strong>Дата публикации</strong></td>
 				<td align="center"><strong>Местонахождение</strong></td>
+				<td align="center"><strong>Колличество</strong></td>
 			</tr>
 			<c:forEach var="book" items="${bookbean}">
 				<tr>
@@ -32,6 +33,7 @@
 					<td><c:out value="${ book.title }" /></td>
 					<td><c:out value="${ book.date }" /></td>
 					<td><c:out value="${ book.location }" /></td>
+					<td><c:out value="${ book.number }" /></td>
 				</tr>
 			</c:forEach>
 		</table>
