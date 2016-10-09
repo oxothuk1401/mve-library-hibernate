@@ -1,5 +1,6 @@
 package by.htp.library.dao;
 
+import by.htp.library.dao.exception.DAOException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 public abstract class OperationDAO<T> {
     Session session = HibernateUtil.openSession();
     Transaction transaction = null;
-
+    //добавление
     public T add(T t) {
         transaction = session.beginTransaction();
         session.save(t);
@@ -21,7 +22,7 @@ public abstract class OperationDAO<T> {
         }
         return t;
     }
-
+    //удаление
     public T delete(T t) {
         session.beginTransaction();
         session.delete(t);
@@ -32,23 +33,35 @@ public abstract class OperationDAO<T> {
         }
         return t;
     }
-
-    public Object get(int id) {
-        Object obj = null;
-        obj = (Object) session.load(Object.class, id);
+    //обновление
+ public T update(T t) {
+        session.beginTransaction();
+        session.merge(t);
+        session.getTransaction().commit();
+        if (transaction != null) {
+            transaction.rollback();
+            session.close();
+        }
+        return t;
+    }
+    //посик по id
+    public T get(long id) {
+        T t = null;
+        t = (T) session.find(getPersistentClass(), id);
         if (session.isOpen()) {
             session.close();
         }
-        return obj;
+        return t;
     }
 
-    public List<Object> getAll() {
-        List<Object> obj = null;
-        obj = session.createCriteria(Object.class).list();
+    //показать все
+    public List<T> getAll() throws DAOException {
+        List<T> t = null;
+        t = session.createCriteria(getPersistentClass()).list();
         if (session.isOpen()) {
             session.close();
         }
-        return obj;
+        return t;
     }
 
     public abstract Class getPersistentClass();

@@ -13,6 +13,6 @@ public final class ShowCatalogService {
     public final static List<Book> showBooks() throws DAOException {
         Factory factory = Factory.getInstance();
         BookOperationDAO bookOperationDAO = factory.getBookOperationDAO();
-        return bookOperationDAO.getBook();
+        return bookOperationDAO.getAll();
     }
 }

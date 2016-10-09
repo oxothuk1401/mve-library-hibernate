@@ -7,6 +7,7 @@ import by.htp.library.entity.User;
 import by.htp.library.service.UserService;
 import by.htp.library.service.exception.ServiceException;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,7 +15,6 @@ import javax.servlet.http.HttpSession;
 public class Login implements Command {
 	private static final String LOGIN = "login";
 	private static final String PASSWORD = "password";
-
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		StringBuilder sb = new StringBuilder();
@@ -59,6 +59,7 @@ public class Login implements Command {
 			switch (ses.getAttribute("local").toString()) {
 			case "ru": errorMessage = "\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd, \ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd \ufffd\ufffd\ufffd \ufffd\ufffd\ufffd\ufffd\ufffd \ufffd \ufffd\ufffd\ufffd\ufffd\ufffd\ufffd";break;
 			case "en": errorMessage = "Please, enter your login and password";break;
+
 			}
 		} catch (DAOException e) {
 			switch (ses.getAttribute("local").toString()) {

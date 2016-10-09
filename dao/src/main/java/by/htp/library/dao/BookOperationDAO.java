@@ -11,13 +11,17 @@ import java.util.List;
  */
 public interface BookOperationDAO<T> {
 
-    List<Book> checkSearch(String searching) throws DAOException;
+//    List<Book> checkSearch(String searching) throws DAOException;
 
-    List<Book> getBook() throws DAOException;
 
     T add(T t);
 
     T delete(T t);
 
+    T update(T t);
+
+    T get(long id);
+
+    List<T> getAll() throws DAOException;
 
 }

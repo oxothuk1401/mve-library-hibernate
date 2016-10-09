@@ -2,7 +2,6 @@ package by.htp.library.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
