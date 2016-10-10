@@ -44,9 +44,9 @@
 //                        break;
 //                    }
 //                }
-//                if (user == null) {
-//                    throw new DAOException();
-//                }
+    //                if (user == null) {
+    //                    throw new DAOException();
+    //                }
 //                connection.close();
 //            } catch (SQLException e) {
 //                throw new DAOException("Error accessing database");

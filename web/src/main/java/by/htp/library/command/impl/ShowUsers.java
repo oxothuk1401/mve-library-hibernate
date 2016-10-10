@@ -31,7 +31,7 @@ public class ShowUsers implements Command {
         if (list != null) {
             set = new TreeSet<>();
             for (int i = 0; i < list.size(); i++) {
-                set.add(list.get(i).getLogin());
+                    set.add(list.get(i).getLogin());
             }
             jsp = new JspSet(set);
             request.setAttribute("userbean", jsp);

@@ -6,6 +6,7 @@ import by.htp.library.dao.exception.DAOException;
 import by.htp.library.entity.User;
 import by.htp.library.service.UserService;
 import by.htp.library.service.exception.ServiceException;
+import org.hibernate.TransactionException;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,14 +58,20 @@ public class Login implements Command {
 			}
 		} catch (ServiceException e) {
 			switch (ses.getAttribute("local").toString()) {
-			case "ru": errorMessage = "\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd, \ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd \ufffd\ufffd\ufffd \ufffd\ufffd\ufffd\ufffd\ufffd \ufffd \ufffd\ufffd\ufffd\ufffd\ufffd\ufffd";break;
+			case "ru": errorMessage = "Пожалуйста, введите ваш логин и пароль";break;
 			case "en": errorMessage = "Please, enter your login and password";break;
 
 			}
 		} catch (DAOException e) {
 			switch (ses.getAttribute("local").toString()) {
-			case "ru": errorMessage = "\ufffd\ufffd\ufffd\ufffd\ufffd \ufffd\ufffd\ufffd \ufffd\ufffd\ufffd\ufffd\ufffd\ufffd \ufffd\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd \ufffd\ufffd \ufffd\ufffd\ufffd\ufffd\ufffd!";break;
+			case "ru": errorMessage = "Логин или пароль введен не правильно!";break;
 			case "en": errorMessage = "Login or password entered is not correct!";break;
+			}
+		}catch (TransactionException e) {
+			switch (ses.getAttribute("local").toString()) {
+//				!!!!!!!!!!!!!!!!!!!!!!!!!!
+				case "ru": errorMessage = "Transaction error.";break;
+				case "en": errorMessage = "Transaction error.";break;
 			}
 		}
 		request.setAttribute("errorMessage", errorMessage);

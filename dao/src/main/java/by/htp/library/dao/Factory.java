@@ -20,11 +20,7 @@ public class Factory {
     }
 
     public BookOperationDAO getBookOperationDAO() { return bookOperationDAO; }
-
-    public UserOperationDAO getUserOperationDAO() {
-        return userOperationDAO;
-    }
-
+    public UserOperationDAO getUserOperationDAO() { return userOperationDAO; }
     public AuthorOperationDAO getAuthorOperationDAO() {
         return authorOperationDAO;
     }

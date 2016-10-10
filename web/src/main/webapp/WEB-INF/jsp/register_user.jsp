@@ -36,7 +36,7 @@
 				<table border="0" cellspacing="1" cellpadding="1">
 				<tr>
 				<td align="left" ><c:out value="${login}" /></td>
-				<td><input type="text" name="phone" size="16"></td>
+				<td><input type="text" name="login" size="16"></td>
 				</tr>
 				<tr>
 				<td align="left" ><c:out value="${enterpassword}" /></td>

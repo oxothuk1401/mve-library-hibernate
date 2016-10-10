@@ -13,15 +13,15 @@ public interface UserOperationDAO<T> {
 
     User checkLogin(String login, String password) throws DAOException;
 
-    boolean checkRegister(String number, String password) throws DAOException;
+    boolean checkRegister(String login, String password) throws DAOException;
 
-    T add(T t);
+    boolean deleteUser(String user) throws DAOException;
 
-    String delete(String user);
 
-    T update(T t);
 
-    T get(long id);
+
+
+
 
     List<T> getAll() throws DAOException;
 

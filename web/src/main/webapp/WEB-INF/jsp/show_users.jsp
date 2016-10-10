@@ -23,6 +23,7 @@
 						<input type="submit" value="${Deleteuser}" />  <br>
 						<input type="text" name="user" size="20" value=""><br>
 				</form>
+				<c:out value="${requestScope.errorMessage}"/><br>
 			</td>
 		</tr>
 	</table>

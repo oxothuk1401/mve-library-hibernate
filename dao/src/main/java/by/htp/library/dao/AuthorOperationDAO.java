@@ -9,9 +9,7 @@ import java.util.List;
  */
 public interface AuthorOperationDAO<T> {
 
-    T add(T t);
 
-    T delete(T t);
 
 
 
