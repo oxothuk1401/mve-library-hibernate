@@ -1,11 +1,7 @@
 package by.htp.library.dao;
 
-import by.htp.library.dao.connectionpool.ConnectionPool;
-import by.htp.library.dao.connectionpool.exception.ConnectionPoolException;
 import by.htp.library.dao.exception.DAOException;
 import by.htp.library.entity.User;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -17,11 +13,12 @@ import java.util.List;
  * Created by oxothuk1401 on 07.10.2016.
  */
 public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO {
-    private final static Logger LOG = LogManager.getLogger("by.htp.library.listners");
+   
+
     public User checkLogin(String login, String password) throws DAOException {
-        User user = null;
         Session session = HibernateUtil.openSession();
         Criteria criteria = session.createCriteria(getPersistentClass());
+        User user = null;
         criteria.add(Restrictions.eq("login", login));
         criteria.add(Restrictions.eq("password", MD5.getMD5(password)));
         user = (User) criteria.uniqueResult();
@@ -29,6 +26,7 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
             throw new DAOException();
         }
         return user;
+
     }
 
     @Override
@@ -37,11 +35,30 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
     }
 
     @Override
-    public List getAll() {
+    public String delete(String userDel) {
+        User user = null;
         Session session = HibernateUtil.openSession();
-        Query query  = session.createQuery("from User");
-        List<User> listUsers = (List<User>) query.list();
-        return listUsers;
+        Criteria criteria = session.createCriteria(getPersistentClass());
+        if(criteria.add(Restrictions.eq("login", userDel)).equals(true)) {
+            return user.getLogin();
+        }
+        return null;
+    }
+
+    @Override
+    public List getAll() throws DAOException {
+            Session session = HibernateUtil.openSession();
+        try {
+            Query query = session.createQuery("from User");
+            List<User> listUsers = (List<User>) query.list();
+            session.close();
+            if (listUsers == null) {
+                throw new DAOException("List of users is empty");
+            }
+            return listUsers;
+        } catch (Exception e) {
+            throw new DAOException("Error accessing database");
+        }
     }
 
     @Override

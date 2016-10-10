@@ -10,14 +10,16 @@ import java.util.List;
  * Created by oxothuk1401 on 07.10.2016.
  */
 public class DBBookOperationDAO extends OperationDAO implements BookOperationDAO  {
+
     @Override
     public List getAll() throws DAOException {
-        Session session = HibernateUtil.openSession();
+            Session session = HibernateUtil.openSession();
         try {
             Query query = session.createQuery("from Book");
             List<Book> listBooks = (List<Book>) query.list();
+            session.close();
             if (listBooks == null) {
-                    throw new DAOException("List is empty");
+                    throw new DAOException("List of books is empty");
                 }
             return listBooks;
         }catch (Exception e) {

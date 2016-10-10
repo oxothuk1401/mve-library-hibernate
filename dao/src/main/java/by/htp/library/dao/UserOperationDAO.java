@@ -17,13 +17,12 @@ public interface UserOperationDAO<T> {
 
     T add(T t);
 
-    T delete(T t);
+    String delete(String user);
 
     T update(T t);
 
     T get(long id);
 
     List<T> getAll() throws DAOException;
-
 
 }
