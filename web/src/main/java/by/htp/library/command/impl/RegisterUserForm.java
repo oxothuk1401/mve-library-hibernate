@@ -24,9 +24,9 @@ public class RegisterUserForm implements Command {
 		String errorMessage = null;
 		String str = null;
 		try {
-			User newUser = RegisterService.checkRegister(request.getParameter(LOGIN),
+			boolean newUser = RegisterService.checkRegister(request.getParameter(LOGIN),
 					request.getParameter(PASSWORD));
-			if (newUser != null) {
+			if (newUser != true) {
 				ses.setAttribute(LOGIN, newUser);
 				ses.setAttribute("userPage", PageName.INDEX_PAGE);
 				switch (ses.getAttribute("local").toString()) {

@@ -1,5 +1,4 @@
 package by.htp.library.dao;
-
 import by.htp.library.dao.exception.DAOException;
 import by.htp.library.entity.User;
 import org.apache.log4j.Logger;
@@ -8,12 +7,12 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.exception.SQLGrammarException;
-
 import java.util.List;
 
 /**
  * Created by oxothuk1401 on 07.10.2016.
  */
+
 public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO {
         private static Logger log = Logger.getLogger(DBUserOperationDAO.class.getName());
 
@@ -32,23 +31,21 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
     }
 
     @Override
-    public User checkRegister(String login, String password) throws DAOException {
+    public boolean checkRegister(String login, String password) throws DAOException {
         Session session = HibernateUtil.getSession();
-        log.error("checkRegister sesion = " + session.hashCode());
+//        log.error("checkRegister sesion = " + session.hashCode());
         Criteria criteria = session.createCriteria(getPersistentClass());
         criteria.add(Restrictions.eq("login", login));
-        User userEqualse = null;
-        userEqualse = (User) criteria.uniqueResult();
-        if(userEqualse == null){
+        if(criteria.uniqueResult() != null){
+            throw new DAOException();
+        }else{
             User user = new User();
             user.setLogin(login);
             user.setPassword(MD5.getMD5(password));
             user.setRole("user");
             user.setBlacklist("unblock");
             add(user);
-            return user;
-        }else{
-            throw new DAOException();
+            return true;
         }
     }
 

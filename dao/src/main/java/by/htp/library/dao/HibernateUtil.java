@@ -8,51 +8,20 @@ import org.hibernate.cfg.Configuration;
 /**
  * Created by oxothuk1401 on 06.10.2016.
  */
-//public class HibernateUtil {
-//    private static Logger log = Logger.getLogger(HibernateUtil.class.getName());
-//    private static final SessionFactory sessionFactory = buildSessionFactory();
-//    public static final ThreadLocal local = new ThreadLocal();
-//
-//    private HibernateUtil() {
-//    }
-//
-//    private static SessionFactory buildSessionFactory() {
-//        try {
-//            return new Configuration().configure().buildSessionFactory();
-//        } catch (Throwable e) {
-//            log.error("SessionFactory creation failed." + e);
-//            throw new ExceptionInInitializerError(e);
-//        }
-//    }
-//
-//    public static SessionFactory getSessionFactory() {
-//        return sessionFactory;
-//    }
-//
-//    public static void sessionClose() {
-//        getSessionFactory().close();
-//    }
-//
-//    public static Session getSession() {
-//        Session session = (Session) local.get();
-//        log.error("openAndSaveIntoLocal = " + session.hashCode());
-//        if (session == null) {
-//            session = sessionFactory.openSession();
-//            local.set(session);
-//        }
-//        return session;
-//    }
-//}
 public class HibernateUtil {
     private static Logger log = Logger.getLogger(HibernateUtil.class.getName());
     private static final SessionFactory sessionFactory = buildSessionFactory();
     public static final ThreadLocal local = new ThreadLocal();
 
+    private HibernateUtil() {
+    }
+
     private static SessionFactory buildSessionFactory() {
         try {
             return new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
+        } catch (Throwable e) {
+            log.error("SessionFactory creation failed." + e);
+            throw new ExceptionInInitializerError(e);
         }
     }
 
@@ -60,7 +29,7 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
-    public static void shutdown() {
+    public static void sessionClose() {
         getSessionFactory().close();
     }
 
@@ -71,7 +40,6 @@ public class HibernateUtil {
             session = sessionFactory.openSession();
             local.set(session);
         }
-
         return session;
     }
 }

@@ -16,20 +16,18 @@ import org.hibernate.TransactionException;
 public class RegisterService {
 	private static Logger log = Logger.getLogger(RegisterService.class.getName());
 
-	public final static User checkRegister(String login, String password) throws ServiceException, DAOException, TransactionException {
+	public final static boolean checkRegister(String login, String password) throws ServiceException, DAOException, TransactionException {
 		if (!Validator.registerValidator(login, password)) {
-			return null;
+			return false;
 		} else {
-			User result = null;
+			boolean result = false;
 			Factory factory = Factory.getInstance();
             UserOperationDAO userOperationDAO = factory.getUserOperationDAO();
             Session session = HibernateUtil.getSession();
             Transaction transaction = null;
 			try{
 				session.beginTransaction();
-				log.error(result.toString());
 				result = userOperationDAO.checkRegister(login, password);
-				log.error(result.toString());
 				transaction.commit();
 			} catch (HibernateException e) {
 				if (transaction != null) {
