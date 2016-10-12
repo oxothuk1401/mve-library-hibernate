@@ -3,6 +3,7 @@ package by.htp.library.command.impl;
 import by.htp.library.command.Command;
 import by.htp.library.controller.PageName;
 import by.htp.library.dao.exception.DAOException;
+import by.htp.library.entity.User;
 import by.htp.library.service.RegisterService;
 import by.htp.library.service.exception.ServiceException;
 import org.hibernate.TransactionException;
@@ -23,9 +24,9 @@ public class RegisterUserForm implements Command {
 		String errorMessage = null;
 		String str = null;
 		try {
-			boolean newUser = RegisterService.checkRegister(request.getParameter(LOGIN),
+			User newUser = RegisterService.checkRegister(request.getParameter(LOGIN),
 					request.getParameter(PASSWORD));
-			if (newUser == true) {
+			if (newUser != null) {
 				ses.setAttribute(LOGIN, newUser);
 				ses.setAttribute("userPage", PageName.INDEX_PAGE);
 				switch (ses.getAttribute("local").toString()) {

@@ -6,6 +6,7 @@ import by.htp.library.dao.exception.DAOException;
 import by.htp.library.entity.User;
 import by.htp.library.service.UserService;
 import by.htp.library.service.exception.ServiceException;
+import org.apache.log4j.Logger;
 import org.hibernate.TransactionException;
 
 
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 public class Login implements Command {
 	private static final String LOGIN = "login";
 	private static final String PASSWORD = "password";
+	private static Logger log = Logger.getLogger(Login.class.getName());
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		StringBuilder sb = new StringBuilder();
@@ -60,21 +62,23 @@ public class Login implements Command {
 			switch (ses.getAttribute("local").toString()) {
 			case "ru": errorMessage = "Пожалуйста, введите ваш логин и пароль";break;
 			case "en": errorMessage = "Please, enter your login and password";break;
-
 			}
+			log.error(errorMessage +" " +e);
 		} catch (DAOException e) {
 			switch (ses.getAttribute("local").toString()) {
 			case "ru": errorMessage = "Логин или пароль введен не правильно!";break;
 			case "en": errorMessage = "Login or password entered is not correct!";break;
 			}
+			log.error(errorMessage +" " +e);
 		}catch (TransactionException e) {
 			switch (ses.getAttribute("local").toString()) {
 //				!!!!!!!!!!!!!!!!!!!!!!!!!!
 				case "ru": errorMessage = "Transaction error.";break;
 				case "en": errorMessage = "Transaction error.";break;
 			}
+			log.error(errorMessage +" " +e);
 		}
 		request.setAttribute("errorMessage", errorMessage);
-		return page;
+        return page;
 	}
 }

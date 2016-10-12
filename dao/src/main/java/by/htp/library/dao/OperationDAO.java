@@ -9,24 +9,24 @@ import java.util.List;
  * Created by oxothuk1401 on 06.10.2016.
  */
 public abstract class OperationDAO<T> {
-    Session session = HibernateUtil.openSession();
-    Transaction transaction = null;
+    Session session = HibernateUtil.getSession();
+
     //добавление
     public T add(T t) {
-        Session session = HibernateUtil.openSession();
+        Session session = HibernateUtil.getSession();
         session.save(t);
         return t;
     }
 
     //удаление
     public T delete(T t) throws DAOException {
-        session.remove(t);
+        session.delete(t);
         return t;
     }
 
     //обновление
  public T update(T t) {
-        session.merge(t);
+        session.update(t);
         return t;
     }
 

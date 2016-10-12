@@ -93,7 +93,7 @@ public class Book {
 //	}
 	@Override
 	public int hashCode() {
-		return 31 * id + 31 * access.hashCode() + 31 * date.hashCode() + 31 * title.hashCode();
+		return 31 * access.hashCode() + 31 * date.hashCode() + 31 * title.hashCode();
 	}
 
 
@@ -106,8 +106,6 @@ public class Book {
 		if (this.getClass() != obj.getClass())
 			return false;
 		Book book = (Book) obj;
-		if (this.id != book.id)
-			return false;
 		if (!this.access.equals(book.access))
 			return false;
 		if (!this.date.equals(book.date))

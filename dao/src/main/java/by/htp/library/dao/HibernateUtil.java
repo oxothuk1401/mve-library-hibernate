@@ -1,5 +1,6 @@
 package by.htp.library.dao;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -7,19 +8,51 @@ import org.hibernate.cfg.Configuration;
 /**
  * Created by oxothuk1401 on 06.10.2016.
  */
+//public class HibernateUtil {
+//    private static Logger log = Logger.getLogger(HibernateUtil.class.getName());
+//    private static final SessionFactory sessionFactory = buildSessionFactory();
+//    public static final ThreadLocal local = new ThreadLocal();
+//
+//    private HibernateUtil() {
+//    }
+//
+//    private static SessionFactory buildSessionFactory() {
+//        try {
+//            return new Configuration().configure().buildSessionFactory();
+//        } catch (Throwable e) {
+//            log.error("SessionFactory creation failed." + e);
+//            throw new ExceptionInInitializerError(e);
+//        }
+//    }
+//
+//    public static SessionFactory getSessionFactory() {
+//        return sessionFactory;
+//    }
+//
+//    public static void sessionClose() {
+//        getSessionFactory().close();
+//    }
+//
+//    public static Session getSession() {
+//        Session session = (Session) local.get();
+//        log.error("openAndSaveIntoLocal = " + session.hashCode());
+//        if (session == null) {
+//            session = sessionFactory.openSession();
+//            local.set(session);
+//        }
+//        return session;
+//    }
+//}
 public class HibernateUtil {
+    private static Logger log = Logger.getLogger(HibernateUtil.class.getName());
     private static final SessionFactory sessionFactory = buildSessionFactory();
     public static final ThreadLocal local = new ThreadLocal();
 
-    private HibernateUtil() {
-    }
-
-    private static SessionFactory buildSessionFactory(){
+    private static SessionFactory buildSessionFactory() {
         try {
-            return  new Configuration().configure().buildSessionFactory();
-        } catch (Throwable e) {
-            System.err.println("SessionFactory creation failed." + e);
-            throw new ExceptionInInitializerError(e);
+            return new Configuration().configure().buildSessionFactory();
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
         }
     }
 
@@ -27,17 +60,18 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
-    public static void sessionClose() {
+    public static void shutdown() {
         getSessionFactory().close();
     }
 
-    public static Session openSession() {
-            Session session = (Session) local.get();
-            if (session == null) {
-                session = sessionFactory.openSession();
-                local.set(session);
-            }
-
-            return session;
+    public static Session getSession() {
+        Session session = (Session) local.get();
+//        log.error("openAndSaveIntoLocal = " + session.hashCode());
+        if (session == null) {
+            session = sessionFactory.openSession();
+            local.set(session);
         }
+
+        return session;
     }
+}

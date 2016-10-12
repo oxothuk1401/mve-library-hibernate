@@ -13,7 +13,7 @@ public interface UserOperationDAO<T> {
 
     User checkLogin(String login, String password) throws DAOException;
 
-    boolean checkRegister(String login, String password) throws DAOException;
+    User checkRegister(String login, String password) throws DAOException;
 
     boolean deleteUser(String user) throws DAOException;
 

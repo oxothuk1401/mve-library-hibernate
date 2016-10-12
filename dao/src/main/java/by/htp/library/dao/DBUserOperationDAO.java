@@ -2,6 +2,7 @@ package by.htp.library.dao;
 
 import by.htp.library.dao.exception.DAOException;
 import by.htp.library.entity.User;
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,10 +15,11 @@ import java.util.List;
  * Created by oxothuk1401 on 07.10.2016.
  */
 public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO {
-
+        private static Logger log = Logger.getLogger(DBUserOperationDAO.class.getName());
 
     public User checkLogin(String login, String password) throws DAOException {
-        Session session = HibernateUtil.openSession();
+        Session session = HibernateUtil.getSession();
+        log.error("checkLogin sesion = " + session.hashCode());
         Criteria criteria = session.createCriteria(getPersistentClass());
         User user = null;
         criteria.add(Restrictions.eq("login", login));
@@ -27,12 +29,12 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
             throw new DAOException();
         }
         return user;
-
     }
 
     @Override
-    public boolean checkRegister(String login, String password) throws DAOException {
-        Session session = HibernateUtil.openSession();
+    public User checkRegister(String login, String password) throws DAOException {
+        Session session = HibernateUtil.getSession();
+        log.error("checkRegister sesion = " + session.hashCode());
         Criteria criteria = session.createCriteria(getPersistentClass());
         criteria.add(Restrictions.eq("login", login));
         User userEqualse = null;
@@ -44,22 +46,21 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
             user.setRole("user");
             user.setBlacklist("unblock");
             add(user);
-            return true;
+            return user;
         }else{
             throw new DAOException();
         }
-
     }
 
     @Override
     public boolean deleteUser(String userLogin) throws DAOException {
 
-        Criteria criteria = HibernateUtil.openSession().createCriteria(getPersistentClass());
+        Criteria criteria = HibernateUtil.getSession().createCriteria(getPersistentClass());
         try {
             User user = null;
             criteria.add(Restrictions.eq("login", userLogin));
             user = (User) criteria.uniqueResult();
-            delete(user);
+            delete(user.getId());
             return true;
         } catch (SQLGrammarException e) {
             throw new DAOException();
@@ -68,7 +69,7 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
 
     @Override
     public List getAll() throws DAOException {
-        Session session = HibernateUtil.openSession();
+        Session session = HibernateUtil.getSession();
         try {
             Query query = session.createQuery("from User");
             List<User> listUsers = (List<User>) query.list();

@@ -13,7 +13,7 @@ public class DBBookOperationDAO extends OperationDAO implements BookOperationDAO
 
     @Override
     public List getAll() throws DAOException {
-            Session session = HibernateUtil.openSession();
+            Session session = HibernateUtil.getSession();
         try {
             Query query = session.createQuery("from Book");
             List<Book> listBooks = (List<Book>) query.list();

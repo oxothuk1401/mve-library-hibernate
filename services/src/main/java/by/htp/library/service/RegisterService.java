@@ -4,7 +4,9 @@ import by.htp.library.dao.Factory;
 import by.htp.library.dao.HibernateUtil;
 import by.htp.library.dao.UserOperationDAO;
 import by.htp.library.dao.exception.DAOException;
+import by.htp.library.entity.User;
 import by.htp.library.service.exception.ServiceException;
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -12,25 +14,31 @@ import org.hibernate.TransactionException;
 
 
 public class RegisterService {
+	private static Logger log = Logger.getLogger(RegisterService.class.getName());
 
-	public final static boolean checkRegister(String login, String password) throws ServiceException, DAOException, TransactionException {
+	public final static User checkRegister(String login, String password) throws ServiceException, DAOException, TransactionException {
 		if (!Validator.registerValidator(login, password)) {
-			return false;
+			return null;
 		} else {
-			boolean result = false;
+			User result = null;
 			Factory factory = Factory.getInstance();
             UserOperationDAO userOperationDAO = factory.getUserOperationDAO();
+            Session session = HibernateUtil.getSession();
+            Transaction transaction = null;
 			try{
-				Session session = HibernateUtil.openSession();
-				Transaction transaction = session.beginTransaction();
-				result = userOperationDAO.checkRegister(login,password);
+				session.beginTransaction();
+				log.error(result.toString());
+				result = userOperationDAO.checkRegister(login, password);
+				log.error(result.toString());
 				transaction.commit();
-			}catch (HibernateException e) {
+			} catch (HibernateException e) {
+				if (transaction != null) {
+					transaction.rollback();
+				}
 				throw new TransactionException("");
 			}
-            return result;
+			return result;
 		}
-
 	}
 
 	static class Validator {
