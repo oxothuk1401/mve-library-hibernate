@@ -12,8 +12,8 @@ public abstract class OperationDAO<T> {
     Session session = HibernateUtil.getSession();
     //добавление
     public T add(T t) {
-        session.save(t);
-        session.update(t);
+        Session session = HibernateUtil.getSession();
+        session.saveOrUpdate(t);
         return t;
     }
 
