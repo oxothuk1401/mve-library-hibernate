@@ -46,11 +46,17 @@ public class Login implements Command {
 				ses.setAttribute("role", user.getRole());
 				request.setAttribute("login", user.getLogin());
 				sb.append("http://127.0.0.1:8080/Library/Controller?command=login&login=");
+//				sb.append("http");
+//				sb.append(":/");
+//				sb.append("/127.0.0.1");
+//				sb.append(":");
+//				sb.append("8080/Library/Controller?command=login&login=");
 				sb.append(request.getParameter(LOGIN));
 				sb.append("&password=");
 				sb.append(request.getParameter(PASSWORD));
 				url = sb.toString();
 				ses.setAttribute("userPage", url);
+
 				page = PageName.ADMIN_PAGE;
 				break;
 			default:
@@ -63,13 +69,13 @@ public class Login implements Command {
 			case "ru": errorMessage = "Пожалуйста, введите ваш логин и пароль";break;
 			case "en": errorMessage = "Please, enter your login and password";break;
 			}
-			log.error(errorMessage +" " +e);
+			log.info(errorMessage +" " +e);
 		} catch (DAOException e) {
 			switch (ses.getAttribute("local").toString()) {
 			case "ru": errorMessage = "Логин или пароль введен не правильно!";break;
 			case "en": errorMessage = "Login or password entered is not correct!";break;
 			}
-			log.error(errorMessage +" " +e);
+			log.info(errorMessage +" " +e);
 		}catch (TransactionException e) {
 			switch (ses.getAttribute("local").toString()) {
 //				!!!!!!!!!!!!!!!!!!!!!!!!!!

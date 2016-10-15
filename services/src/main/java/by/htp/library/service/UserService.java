@@ -6,14 +6,12 @@ import by.htp.library.dao.UserOperationDAO;
 import by.htp.library.dao.exception.DAOException;
 import by.htp.library.entity.User;
 import by.htp.library.service.exception.ServiceException;
-import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.TransactionException;
 
 public final class UserService {
-    static Logger log = Logger.getLogger(UserService.class.getName());
 
     public final static User checkLogin(String login, String password) throws ServiceException, DAOException {
         if (!Validator.loginValidator(login, password)) {

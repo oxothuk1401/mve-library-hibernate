@@ -11,7 +11,7 @@ import org.hibernate.cfg.Configuration;
 public class HibernateUtil {
     private static Logger log = Logger.getLogger(HibernateUtil.class.getName());
     private static final SessionFactory sessionFactory = buildSessionFactory();
-    public static final ThreadLocal local = new ThreadLocal();
+    public static final ThreadLocal sessionlocal = new ThreadLocal();
 
     private HibernateUtil() {
     }
@@ -29,16 +29,16 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
-    public static void sessionClose() {
+    public static void sessionFactoryClose() {
         getSessionFactory().close();
     }
 
     public static Session getSession() {
-        Session session = (Session) local.get();
+        Session session = (Session) sessionlocal.get();
 //        log.error("openAndSaveIntoLocal = " + session.hashCode());
         if (session == null) {
             session = sessionFactory.openSession();
-            local.set(session);
+            sessionlocal.set(session);
         }
         return session;
     }

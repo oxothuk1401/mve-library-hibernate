@@ -5,18 +5,21 @@ import by.htp.library.controller.PageName;
 import by.htp.library.dao.exception.DAOException;
 import by.htp.library.service.DeleteUserService;
 import by.htp.library.service.exception.ServiceException;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class DeleteUser implements Command {
+	private static Logger log = Logger.getLogger(Login.class.getName());
 	private static final String USER = "user";
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		String page = PageName.SHOW_USERS;
 		HttpSession ses = request.getSession(true);
+//		String page = ses.getAttribute("userPage").toString();
+		String page = PageName.ADMIN_PAGE;
 		boolean delete;
 		String errorMessage=null;
 		try {

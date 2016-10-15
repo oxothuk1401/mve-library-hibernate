@@ -24,11 +24,12 @@
 	</servlet-mapping>
 	<listener>
 		<listener-class>by.htp.library.listners.Listners</listener-class>
+		<!--<listener-class>by.htp.library.listners.DAOlistners</listener-class>-->
 	</listener>
 	<filter>
 		<display-name>CharsetFilters</display-name>
 		<filter-name>CharsetFilters</filter-name>
-		<filter-class>by.htp.library.service.CharsetFilters</filter-class>
+		<filter-class>by.htp.library.Filters.CharsetFilters</filter-class>
 		<init-param>
 			<param-name>characterEncoding</param-name>
 			<param-value>utf-8</param-value>
@@ -38,6 +39,15 @@
 		<filter-name>CharsetFilters</filter-name>
 		<url-pattern>/Controller</url-pattern>
 	</filter-mapping>
+	<!--<filter>-->
+		<!--<display-name>HibernateFilter</display-name>-->
+		<!--<filter-name>HibernateFilter</filter-name>-->
+		<!--<filter-class>by.htp.library.Filters.HibernateFilter</filter-class>-->
+	<!--</filter>-->
+	<!--<filter-mapping>-->
+		<!--<filter-name>HibernateFilter</filter-name>-->
+		<!--<url-pattern>/Controller</url-pattern>-->
+	<!--</filter-mapping>-->
 	<jsp-config>
 		<taglib>
 			 <taglib-uri>/WEB-INF/tld/taglib.tld </taglib-uri>
