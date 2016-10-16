@@ -3,7 +3,6 @@ package by.htp.library.controller;
 import by.htp.library.command.Command;
 import by.htp.library.command.CommandHelper;
 import by.htp.library.controller.exception.CommandException;
-import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -17,7 +16,7 @@ public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String COMMAND_NAME = "command";
 	private final CommandHelper commandHelper = new CommandHelper();
-	private final static Logger LOG = LogManager.getLogger("by.htp.library.listners");
+	private static Logger log = Logger.getLogger(Controller.class.getName());
 	public Controller() {
 		super();
 	}

@@ -21,7 +21,9 @@
 		<table border="1" align="center">
 
 			<tr bgcolor="#CCCCCC">
-				<td align="center"><strong>Доступ</strong></td>
+				<td align="center"><strong>ID</strong></td>
+				<td align="center"><strong>Доступность</strong></td>
+				<td align="center"><strong>Автор</strong></td>
 				<td align="center"><strong>Название</strong></td>
 				<td align="center"><strong>Дата публикации</strong></td>
 				<td align="center"><strong>Местонахождение</strong></td>
@@ -29,7 +31,9 @@
 			</tr>
 			<c:forEach var="book" items="${bookbean}">
 				<tr>
+					<td><c:out value="${ book.id }" /></td>
 					<td><c:out value="${ book.access }" /></td>
+					<td><c:out value="${ book.author }" /></td>
 					<td><c:out value="${ book.title }" /></td>
 					<td><c:out value="${ book.date }" /></td>
 					<td><c:out value="${ book.location }" /></td>

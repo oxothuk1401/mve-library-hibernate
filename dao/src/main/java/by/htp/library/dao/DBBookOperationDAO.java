@@ -12,12 +12,12 @@ import java.util.List;
  */
 public class DBBookOperationDAO extends OperationDAO implements BookOperationDAO  {
     private static Logger log = Logger.getLogger(DBUserOperationDAO.class.getName());
-    Session session = HibernateUtil.getSession();
+
     @Override
     public List getAll() throws DAOException {
-
-        log.info(session.hashCode());
         try {
+            Session session = HibernateUtil.getSession();
+            log.error("getAllBooks sesion = " + session.hashCode());
             Query query = session.createQuery("from Book");
             List<Book> listBooks = (List<Book>) query.list();
             if (listBooks == null) {

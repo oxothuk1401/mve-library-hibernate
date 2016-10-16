@@ -20,7 +20,7 @@ public class ShowUsers implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         List<User> list = new ArrayList<>();
         String page = null;
-        TreeSet<String> set = null;
+        TreeSet<Object> set = null;
         JspSet jsp = null;
         try {
             list = ShowUsersService.showUsers();

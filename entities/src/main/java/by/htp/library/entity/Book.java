@@ -10,6 +10,8 @@ public class Book {
 	private int id = 0;
 	@Column(name = "access")
 	private String access = null;
+	@Column(name = "author")
+	private String author = null;
 	@Column(name = "title")
 	private String title = null;
 	@Column(name = "date")
@@ -19,6 +21,9 @@ public class Book {
 	@Column(name = "number")
 	private int number = 0;
 
+
+	public String getAuthor() {return author;}
+	public void setAuthor(String author) {this.author = author;	}
 
 	public String getLocation() {
 		return location;
@@ -66,8 +71,8 @@ public class Book {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		
-//		sb.append("Author : ");
-//		sb.append(this.author+ "\n");
+		sb.append("Author : ");
+		sb.append(this.author+ "\n");
 		sb.append("\n");
 		sb.append("Title : ");
 		sb.append(this.title + " ");
@@ -93,7 +98,7 @@ public class Book {
 //	}
 	@Override
 	public int hashCode() {
-		return 31 * access.hashCode() + 31 * date.hashCode() + 31 * title.hashCode();
+		return 31 * author.hashCode() + 31 * access.hashCode() + 31 * date.hashCode() + 31 * title.hashCode();
 	}
 
 
@@ -106,6 +111,8 @@ public class Book {
 		if (this.getClass() != obj.getClass())
 			return false;
 		Book book = (Book) obj;
+		if (!this.author.equals(book.author))
+			return false;
 		if (!this.access.equals(book.access))
 			return false;
 		if (!this.date.equals(book.date))

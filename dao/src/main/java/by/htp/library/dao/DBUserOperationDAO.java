@@ -17,14 +17,12 @@ import java.util.List;
 
 public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO {
     private static Logger log = Logger.getLogger(DBUserOperationDAO.class.getName());
-    Session session = HibernateUtil.getSession();
-    Criteria criteria = session.createCriteria(getPersistentClass());
-    User user = null;
 
     public User checkLogin(String login, String password) throws DAOException {
-//        Session session = HibernateUtil.getSession();
+        User user;
+        Session session = HibernateUtil.getSession();
+        log.info("session_chekLogin_DB = " + session.hashCode());
         Criteria criteria = session.createCriteria(getPersistentClass());
-        log.error("checkLogin sesion = " + session.hashCode());
         criteria.add(Restrictions.eq("login", login));
         criteria.add(Restrictions.eq("password", MD5.getMD5(password)));
         user = (User) criteria.uniqueResult();
@@ -36,9 +34,9 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
 
     @Override
     public User checkRegister(String login, String password) throws DAOException {
-//        Session session = HibernateUtil.getSession();
+        Session session = HibernateUtil.getSession();
         Criteria criteria = session.createCriteria(getPersistentClass());
-        log.error("checkRegister sesion = " + session.hashCode());
+        log.info("session_checkRegister_DB = " + session.hashCode());
         criteria.add(Restrictions.eq("login", login));
         if (criteria.uniqueResult() != null) {
             throw new DAOException();
@@ -54,13 +52,16 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
     }
 
     @Override
-    public boolean deleteUser(String userLogin) throws DAOException {
+    public User deleteUser(String userLogin) throws DAOException {
         try {
+            Session session = HibernateUtil.getSession();
             Criteria criteria = session.createCriteria(getPersistentClass());
             criteria.add(Restrictions.eq("login", userLogin));
+            User user = new User();
             user = (User) criteria.uniqueResult();
-            delete(user.getLogin());
-            return true;
+            user.setBlacklist("block");
+            update(user);
+            return user;
         } catch (SQLGrammarException e) {
             throw new DAOException();
         }
@@ -69,9 +70,9 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
     @Override
     public List getAll() throws DAOException {
         try {
-//            Session session = HibernateUtil.getSession();
+            Session session = HibernateUtil.getSession();
             log.error("getAllUsers sesion = " + session.hashCode());
-            Query query = session.createQuery("from User");
+            Query query = session.createQuery("from User where blacklist = 'unblock'");
             List<User> listUsers = (List<User>) query.list();
             if (listUsers == null) {
                 throw new DAOException("List of users is empty");

@@ -2,7 +2,6 @@ package by.htp.library.dao;
 
 import by.htp.library.dao.exception.DAOException;
 import by.htp.library.entity.User;
-import org.omg.CORBA.Object;
 
 import java.util.List;
 
@@ -15,13 +14,7 @@ public interface UserOperationDAO<T> {
 
     User checkRegister(String login, String password) throws DAOException;
 
-    boolean deleteUser(String user) throws DAOException;
-
-
-
-
-
-
+    User deleteUser(String user) throws DAOException;
 
     List<T> getAll() throws DAOException;
 
