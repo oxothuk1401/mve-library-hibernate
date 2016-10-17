@@ -18,7 +18,7 @@
 <body>
 	<table width="1100" border="0" align="center" cellspacing="0" cellpadding="10">
 
-		<table border="1" align="center">
+		<table width="1100" border="1" align="center">
 
 			<tr bgcolor="#CCCCCC">
 				<td align="center"><strong>ID</strong></td>

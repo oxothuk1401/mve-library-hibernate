@@ -60,14 +60,14 @@ public class Login implements Command {
 			}
 		} catch (ServiceException e) {
 			switch (ses.getAttribute("local").toString()) {
-			case "ru": errorMessage = "Пожалуйста, введите ваш логин и пароль";break;
 			case "en": errorMessage = "Please, enter your login and password";break;
+			case "ru": errorMessage = "Пожалуйста, введите ваш логин и пароль";break;
 			}
 			log.info(errorMessage +" " +e);
 		} catch (DAOException e) {
 			switch (ses.getAttribute("local").toString()) {
-			case "ru": errorMessage = "Логин или пароль введен не правильно!";break;
 			case "en": errorMessage = "Login or password entered is not correct!";break;
+			case "ru": errorMessage = "Логин или пароль введены не правильно!";break;
 			}
 			log.info(errorMessage +" " +e);
 		}catch (TransactionException e) {
@@ -77,6 +77,11 @@ public class Login implements Command {
 				case "en": errorMessage = "Transaction error.";break;
 			}
 			log.error(errorMessage +" " +e);
+		} catch (Exception e) {
+			switch (ses.getAttribute("local").toString()) {
+				case "en": errorMessage = "You blocked, contact your administrator!";break;
+				case "ru": errorMessage = "Вы заблокированы обратитесь к администратору!";break;
+			}
 		}
 		request.setAttribute("errorMessage", errorMessage);
         return page;

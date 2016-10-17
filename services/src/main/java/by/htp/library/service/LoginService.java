@@ -3,7 +3,6 @@ package by.htp.library.service;
 import by.htp.library.dao.Factory;
 import by.htp.library.dao.HibernateUtil;
 import by.htp.library.dao.UserOperationDAO;
-import by.htp.library.dao.exception.DAOException;
 import by.htp.library.entity.User;
 import by.htp.library.service.exception.ServiceException;
 import org.apache.log4j.Logger;
@@ -15,7 +14,7 @@ import org.hibernate.TransactionException;
 public final class LoginService {
     private static Logger log = Logger.getLogger(LoginService.class.getName());
 
-    public final static User checkLogin(String login, String password) throws ServiceException, DAOException {
+    public final static User checkLogin(String login, String password) throws Exception {
         if (!Validator.loginValidator(login, password)) {
             return null;
         } else {
@@ -36,10 +35,13 @@ public final class LoginService {
                 }
                 throw new TransactionException("");
             }
-            return result;
+            if (result.getBlacklist().equals("unblock")) {
+                return result;
+            }else{
+                throw new Exception();
+            }
         }
     }
-
     static class Validator {
         public static boolean loginValidator(String login, String password) throws ServiceException {
             if (login.isEmpty() | password.isEmpty()) {

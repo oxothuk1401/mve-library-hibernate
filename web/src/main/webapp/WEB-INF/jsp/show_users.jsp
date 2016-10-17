@@ -17,6 +17,10 @@
     <fmt:message bundle="${loc}" key="local.Deleteuser" var="deleteUser"/>
     <fmt:message bundle="${loc}" key="local.apply" var="apply"/>
     <fmt:message bundle="${loc}" key="local.enterusername" var="enterUsername"/>
+    <fmt:message bundle="${loc}" key="local.login" var="login"/>
+    <fmt:message bundle="${loc}" key="local.id" var="id"/>
+    <fmt:message bundle="${loc}" key="local.role" var="role"/>
+    <fmt:message bundle="${loc}" key="local.blacklist" var="blackList"/>
 </head>
 <body>
 <table width="500" border="0" align="center" cellspacing="0" cellpadding="10">
@@ -38,8 +42,25 @@
     <tr>
         <td width="1100" align="center" height="50">
             <c:out value="${registrlists}"/><br><br>
-            <jsp:useBean id="userbean" class="by.htp.library.controller.jspTeg.JspSet" scope="request"/>
-            <mytag:jspset set="${userbean}"/>
+            <%--<jsp:useBean id="userbean" class="by.htp.library.controller.jspTeg.JspSet" scope="request"/>--%>
+            <%--<mytag:jspset set="${userbean}"/>--%>
+
+                <table width="500" border="1" align="center">
+
+                    <tr bgcolor="#CCCCCC">
+                        <td align="center"><strong>${id}</strong></td>
+                        <td align="center"><strong>${login}</strong></td>
+                        <td align="center"><strong>${role}</strong></td>
+                        <td align="center"><strong>${blackList}</strong></td>
+                    </tr>
+                    <c:forEach var="user" items="${userbean}">
+                        <tr>
+                            <td><c:out value="${ user.id }" /></td>
+                            <td><c:out value="${ user.login }" /></td>
+                            <td><c:out value="${ user.role }" /></td>
+                            <td><c:out value="${ user.blacklist }" /></td>
+                        </tr>
+                    </c:forEach>
         </td>
     </tr>
 </table>

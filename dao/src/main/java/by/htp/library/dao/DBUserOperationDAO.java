@@ -58,7 +58,6 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
             criteria.add(Restrictions.eq("login", userLogin));
             User user = new User();
             user = (User) criteria.uniqueResult();
-            user.setBlacklist("userLogin");
             delete(user);
             return user;
         } catch (SQLGrammarException e) {
