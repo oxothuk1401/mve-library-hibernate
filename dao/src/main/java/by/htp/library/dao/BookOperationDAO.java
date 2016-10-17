@@ -1,6 +1,7 @@
 package by.htp.library.dao;
 
 import by.htp.library.dao.exception.DAOException;
+import by.htp.library.entity.Book;
 
 import java.util.List;
 
@@ -9,8 +10,9 @@ import java.util.List;
  */
 public interface BookOperationDAO<T> {
 
-//    List<Book> checkSearch(String searching) throws DAOException;
+    List<Book> checkSearch(String searching, String command) throws DAOException;
 
     List<T> getAll() throws DAOException;
+
 
 }

@@ -18,8 +18,8 @@ public class Book {
 	private String date = null;
 	@Column(name = "location")
 	private String location = null;;
-	@Column(name = "number")
-	private int number = 0;
+	@Column(name = "amount")
+	private int amount = 0;
 
 
 	public String getAuthor() {return author;}
@@ -32,11 +32,11 @@ public class Book {
 		this.location = location;
 	}
 
-	public int getNumber() {
-		return number;
+	public int getAmount() {
+		return amount;
 	}
-	public void setNumber(int number) {
-		this.number = number;
+	public void setAmount(int number) {
+		this.amount = amount;
 	}
 
 	public String getTitle() {
@@ -83,8 +83,8 @@ public class Book {
 		sb.append("Location : ");
 		sb.append(this.location + " ");
 		sb.append("\n");
-		sb.append("Number : ");
-		sb.append(this.number + " ");
+		sb.append("Amount : ");
+		sb.append(this.amount + " ");
 		sb.append("\n");
 		sb.append("Access : ");
 		sb.append(this.access + " ");
