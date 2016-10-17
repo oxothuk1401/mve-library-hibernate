@@ -15,6 +15,8 @@ public final class CommandHelper {
 		commands.put(CommandName.REGISTER_USER_FORM, new RegisterUserForm());
 		commands.put(CommandName.SHOW_CATALOG, new ShowCatalog());
 		commands.put(CommandName.SHOW_USERS, new ShowUsers());
+		commands.put(CommandName.BLOCK_USER, new BlockUser());
+		commands.put(CommandName.UNLOCK_USER, new UnLockUser());
 //		commands.put(CommandName.SEARCH, new SearchBook());
 		commands.put(CommandName.DELETE_USER, new DeleteUser());
 		commands.put(CommandName.CHANGE_LOCAL, new ChangeLocal());

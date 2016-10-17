@@ -26,7 +26,6 @@ public final class ShowCatalogService {
         try {
             transaction = session.beginTransaction();
             result = bookOperationDAO.getAll();
-            log.info(result);
             log.info("session_showBooks_service_return = " + session.hashCode());
             transaction.commit();
         } catch (HibernateException e) {

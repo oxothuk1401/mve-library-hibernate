@@ -13,7 +13,6 @@
 <fmt:message bundle="${loc}" key="local.search" var="search" />
 <fmt:message bundle="${loc}" key="local.exit" var="exit" />
 <fmt:message bundle="${loc}" key="local.nameAdmin" var="nameAdmin" />
-<fmt:message bundle="${loc}" key="local.Blockuser" var="Blockuser" />
 <fmt:message bundle="${loc}" key="local.addbook" var="addbook" />
 <fmt:message bundle="${loc}" key="local.viewcatalog" var="viewcatalog" />
 <fmt:message bundle="${loc}" key="local.viewusers" var="viewusers" />
@@ -47,15 +46,6 @@
 			</tr>
 		</table><br>
 		<table width="1100" border="0" align="center" cellspacing="0" cellpadding="0">
-		<tr>
-			<td width="220" align="left" height="0">
-					<form action="Controller" method="post">
-						<input type="hidden" name="command" value="block-user">
-						<input type="submit" value="${Blockuser}" />
-						<input type="text" name="block" size="20" value=""><br>
-					</form>
-			</td>
-		</tr>
 		<tr>
 			<td width="220" align="left" height="0">
 					<form action="Controller" method="post">

@@ -12,23 +12,23 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.TransactionException;
 
-public final class DeleteUserService {
-    private static Logger log = Logger.getLogger(DeleteUserService.class.getName());
+public final class LoginService {
+    private static Logger log = Logger.getLogger(LoginService.class.getName());
 
-    public final static User deliteUser(String user) throws DAOException, ServiceException {
-        if (!DeleteUserService.Validator.userValidator(user)) {
+    public final static User checkLogin(String login, String password) throws ServiceException, DAOException {
+        if (!Validator.loginValidator(login, password)) {
             return null;
         } else {
             User result = null;
             Factory factory = Factory.getInstance();
             UserOperationDAO userOperationDAO = factory.getUserOperationDAO();
             Session session = HibernateUtil.getSession();
-            log.info("session_deliteUser_service = " + session.hashCode());
+            log.info("session_chekLogin_service = " + session.hashCode());
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
-                result = userOperationDAO.deleteUser(user);
-                log.info("session_deliteUser_service_return = " + session.hashCode());
+                result = userOperationDAO.checkLogin(login, password);
+                log.info("session_chekLogin_service_return = " + session.hashCode());
                 transaction.commit();
             } catch (HibernateException e) {
                 if (transaction != null) {
@@ -41,8 +41,8 @@ public final class DeleteUserService {
     }
 
     static class Validator {
-        public static boolean userValidator(String user) throws ServiceException {
-            if (user.isEmpty()) {
+        public static boolean loginValidator(String login, String password) throws ServiceException {
+            if (login.isEmpty() | password.isEmpty()) {
                 throw new ServiceException();
             }
             return true;

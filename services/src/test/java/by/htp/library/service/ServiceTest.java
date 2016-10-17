@@ -23,7 +23,7 @@
 //    @Ignore
 //    @Test(expected = ServiceException.class)
 //    public void checkLogin() throws Exception {
-//        assertNotNull(UserService.checkLogin("",""));
+//        assertNotNull(LoginService.checkLogin("",""));
 //    }
 //    @Ignore
 //    @Test

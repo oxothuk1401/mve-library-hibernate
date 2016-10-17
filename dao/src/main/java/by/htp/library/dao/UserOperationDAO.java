@@ -16,6 +16,10 @@ public interface UserOperationDAO<T> {
 
     User deleteUser(String user) throws DAOException;
 
+    User blockUser(String user) throws DAOException;
+
+    User unLockUser(String user) throws DAOException;
+
     List<T> getAll() throws DAOException;
 
 }

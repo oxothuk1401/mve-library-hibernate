@@ -4,7 +4,7 @@ import by.htp.library.command.Command;
 import by.htp.library.controller.PageName;
 import by.htp.library.dao.exception.DAOException;
 import by.htp.library.entity.User;
-import by.htp.library.service.UserService;
+import by.htp.library.service.LoginService;
 import by.htp.library.service.exception.ServiceException;
 import org.apache.log4j.Logger;
 import org.hibernate.TransactionException;
@@ -27,7 +27,7 @@ public class Login implements Command {
 		String url = null;
 		String errorMessage = null;
 		try {
-			user = UserService.checkLogin(request.getParameter(LOGIN), request.getParameter(PASSWORD));
+			user = LoginService.checkLogin(request.getParameter(LOGIN), request.getParameter(PASSWORD));
 			switch (user.getRole()) {
 			case "user":
 				ses.setAttribute("login", user);

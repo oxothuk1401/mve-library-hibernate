@@ -16,6 +16,5 @@
 
         <mapping class="by.htp.library.entity.Book"/>
         <mapping class="by.htp.library.entity.User"/>
-        <mapping class="by.htp.library.entity.Author"/>
     </session-factory>
 </hibernate-configuration>

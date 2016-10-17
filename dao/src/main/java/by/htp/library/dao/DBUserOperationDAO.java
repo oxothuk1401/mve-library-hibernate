@@ -50,9 +50,24 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
             return user;
         }
     }
-
     @Override
     public User deleteUser(String userLogin) throws DAOException {
+        try {
+            Session session = HibernateUtil.getSession();
+            Criteria criteria = session.createCriteria(getPersistentClass());
+            criteria.add(Restrictions.eq("login", userLogin));
+            User user = new User();
+            user = (User) criteria.uniqueResult();
+            user.setBlacklist("userLogin");
+            delete(user);
+            return user;
+        } catch (SQLGrammarException e) {
+            throw new DAOException();
+        }
+    }
+
+    @Override
+    public User blockUser(String userLogin) throws DAOException {
         try {
             Session session = HibernateUtil.getSession();
             Criteria criteria = session.createCriteria(getPersistentClass());
@@ -66,13 +81,28 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
             throw new DAOException();
         }
     }
+    @Override
+    public User unLockUser(String userLogin) throws DAOException {
+        try {
+            Session session = HibernateUtil.getSession();
+            Criteria criteria = session.createCriteria(getPersistentClass());
+            criteria.add(Restrictions.eq("login", userLogin));
+            User user = new User();
+            user = (User) criteria.uniqueResult();
+            user.setBlacklist("unblock");
+            update(user);
+            return user;
+        } catch (SQLGrammarException e) {
+            throw new DAOException();
+        }
+    }
 
     @Override
     public List getAll() throws DAOException {
         try {
             Session session = HibernateUtil.getSession();
             log.error("getAllUsers sesion = " + session.hashCode());
-            Query query = session.createQuery("from User where blacklist = 'unblock'");
+            Query query = session.createQuery("from User");
             List<User> listUsers = (List<User>) query.list();
             if (listUsers == null) {
                 throw new DAOException("List of users is empty");

@@ -23,7 +23,6 @@
 		<url-pattern>/Controller</url-pattern>
 	</servlet-mapping>
 	<listener>
-		<listener-class>by.htp.library.listners.Listners</listener-class>
 		<listener-class>by.htp.library.listners.DAOlistners</listener-class>
 	</listener>
 	<filter>

@@ -12,7 +12,7 @@
 //public class ValidatorTest {
 //    @Test(expected = ServiceException.class)
 //    public void loginValidator() throws Exception {
-//        assertNotNull(UserService.Validator.loginValidator("",""));
+//        assertNotNull(LoginService.Validator.loginValidator("",""));
 //    }
 //    @Test(expected = ServiceException.class)
 //    public void registValidator() throws Exception {
