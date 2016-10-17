@@ -16,6 +16,7 @@ import java.util.List;
 public class SearchBook implements Command {
     private static final String SEARCHING = "searching";
     private static final String COMMAND = "command";
+    private static final String SORTED = "sorted";
     private static Logger log = Logger.getLogger(Login.class.getName());
 
     @Override
@@ -25,16 +26,20 @@ public class SearchBook implements Command {
         List<Book> list = null;
         String errorMessage = null;
         try {
-            list = SearchService.checkSearch(request.getParameter(SEARCHING), request.getParameter(COMMAND));
+            list = SearchService.checkSearch(request.getParameter(SEARCHING), request.getParameter(COMMAND), request.getParameter(SORTED));
             if (list != null){
                 request.setAttribute("bookbean", list);
-                page = PageName.SEARCH_BOOK;
+                if(session.getAttribute("role").toString().equals("admin")) {
+                    page = PageName.ADMIN_PAGE;
+                }else{
+                    page = PageName.USER_PAGE;
+                }
             }
         } catch (ServiceException e) {
             switch (session.getAttribute("local").toString()) {
 //                case "ru": errorMessage = "Ничего не введено"; break;
                 case "en": errorMessage = "Do not enter anything."; break;
-                case "ru": errorMessage = "Do not enter anything."; break;
+                case "ru": errorMessage = "Ничего не введено."; break;
             }
             switch (session.getAttribute("role").toString()) {
                 case "admin":  page = PageName.ADMIN_PAGE; break;

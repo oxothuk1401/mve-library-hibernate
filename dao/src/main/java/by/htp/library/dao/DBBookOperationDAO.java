@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -33,12 +34,13 @@ public class DBBookOperationDAO extends OperationDAO implements BookOperationDAO
     }
 
     @Override
-    public List<Book> checkSearch(String searching, String command) throws DAOException {
+    public List<Book> checkSearch(String searching, String command, String sorted) throws DAOException {
         try {
             List<Book> resault = null;
             Session session = HibernateUtil.getSession();
             Criteria criteria = session.createCriteria(getPersistentClass());
             criteria.add(Restrictions.like(command, searching + "%"));
+            criteria.addOrder(Order.asc(sorted));
             resault = criteria.list();
             if (resault == null) {
                 throw new DAOException();

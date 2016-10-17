@@ -15,7 +15,7 @@ import java.util.List;
 
 public class SearchService {
 
-	public final static List<Book> checkSearch(String searching, String command) throws ServiceException, DAOException {
+	public final static List<Book> checkSearch(String searching, String command, String sorted) throws ServiceException, DAOException {
 		if (!Validator.searchValidator(searching)) {
 			return null;
 		} else {
@@ -26,7 +26,7 @@ public class SearchService {
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
-                result = bookOperationDAO.checkSearch(searching, command);
+                result = bookOperationDAO.checkSearch(searching, command, sorted);
                 transaction.commit();
             } catch (HibernateException e) {
                 if (transaction != null) {

@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface BookOperationDAO<T> {
 
-    List<Book> checkSearch(String searching, String command) throws DAOException;
+    List<Book> checkSearch(String searching, String command, String sorted) throws DAOException;
 
     List<T> getAll() throws DAOException;
 

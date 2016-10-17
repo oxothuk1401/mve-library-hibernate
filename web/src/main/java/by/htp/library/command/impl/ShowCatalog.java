@@ -22,6 +22,6 @@ public class ShowCatalog implements Command {
 			e.getMessage();
 		}
 		request.setAttribute("bookbean", list);
-		return PageName.SHOW_CATALOG;
+		return PageName.ADMIN_PAGE;
 	}
 }
