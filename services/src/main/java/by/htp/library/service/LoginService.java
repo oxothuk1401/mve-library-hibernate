@@ -22,12 +22,10 @@ public final class LoginService {
             Factory factory = Factory.getInstance();
             UserOperationDAO userOperationDAO = factory.getUserOperationDAO();
             Session session = HibernateUtil.getSession();
-            log.info("session_chekLogin_service = " + session.hashCode());
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
                 result = userOperationDAO.checkLogin(login, password);
-                log.info("session_chekLogin_service_return = " + session.hashCode());
                 transaction.commit();
             } catch (HibernateException e) {
                 if (transaction != null) {

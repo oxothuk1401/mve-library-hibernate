@@ -33,6 +33,7 @@ public class HibernateUtil {
         getSessionFactory().close();
     }
 
+
     public static Session getSession() {
         Session session = (Session) sessionlocal.get();
 //        log.error("openAndSaveIntoLocal = " + session.hashCode());
@@ -41,5 +42,11 @@ public class HibernateUtil {
             sessionlocal.set(session);
         }
         return session;
+    }
+
+    public static void releaseSession(Session session) {
+        if (session != null) {
+            sessionlocal.remove();
+        }
     }
 }

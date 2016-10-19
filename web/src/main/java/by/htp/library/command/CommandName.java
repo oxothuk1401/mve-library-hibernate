@@ -12,6 +12,7 @@ public enum CommandName {
 	//operation by user
 	SHOW_USERS, DELETE_USER, BLOCK_USER, UNLOCK_USER,
 
-	RETURN_PAGE
+	RETURN_PAGE,
+	SHOW_USERS1
 
 }

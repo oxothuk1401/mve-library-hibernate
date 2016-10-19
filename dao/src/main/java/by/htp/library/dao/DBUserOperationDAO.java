@@ -4,10 +4,10 @@ import by.htp.library.dao.exception.DAOException;
 import by.htp.library.entity.User;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.exception.SQLGrammarException;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -50,6 +50,7 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
             return user;
         }
     }
+
     @Override
     public User deleteUser(String userLogin) throws DAOException {
         try {
@@ -80,6 +81,7 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
             throw new DAOException();
         }
     }
+
     @Override
     public User unLockUser(String userLogin) throws DAOException {
         try {
@@ -94,6 +96,34 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
         } catch (SQLGrammarException e) {
             throw new DAOException();
         }
+    }
+
+    public List<User> takeUser(String position, String amount) throws DAOException {
+        try {
+            Session session = HibernateUtil.getSession();
+            log.error("getAllUsers sesion = " + session.hashCode());
+            Criteria criteria = session.createCriteria(getPersistentClass());
+            log.info(Integer.valueOf(position));
+            log.info(Integer.valueOf(amount));
+            criteria.setFirstResult(Integer.valueOf(position));
+            criteria.setMaxResults(Integer.valueOf(amount));
+            List<User> listUsers = criteria.list();
+            log.info(listUsers);
+            if (listUsers == null) {
+                throw new DAOException("List of users is empty");
+            }
+            return listUsers;
+        } catch (Exception e) {
+            throw new DAOException("Error accessing database");
+        }
+    }
+
+    public int countAllUsers() throws DAOException {
+        Session session = HibernateUtil.getSession();
+        Criteria criteria = session.createCriteria(getPersistentClass());
+        List<User> userList = criteria.list();
+        int countAllUsers = userList.size();
+        return countAllUsers;
     }
 
     @Override

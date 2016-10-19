@@ -27,10 +27,8 @@ public class HibernateFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
         Session session = HibernateUtil.getSession();
-        log.error("HibernateFilter session_start" + session.hashCode());
         filterChain.doFilter(httpServletRequest, httpServletResponse);
-        log.error("HibernateFilter session_close" + session.hashCode());
-        session.close();
+        HibernateUtil.releaseSession(session);
     }
 
     @Override

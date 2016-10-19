@@ -91,6 +91,16 @@
             </form>
         </td>
     </tr>
+    <tr>
+        <td width="220" align="left" height=0>
+            <form action="Controller" method="get">
+                <input type="hidden" name="command" value="show-users1">
+                <input type="hidden" name="position" value="0">
+                <input type="hidden" name="amount" value="3">
+                <input type="submit" value="SHOWUSERSPANGIN"/>
+            </form>
+        </td>
+    </tr>
 </table>
 <table width="1100" border="0" align="center" cellspacing="0" cellpadding="10">
     <td width="1100" align="center">

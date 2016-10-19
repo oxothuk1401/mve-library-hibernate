@@ -22,23 +22,45 @@ public class Controller extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-		String commandName;
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		if (request.getSession(true).getAttribute("local") == null){
+			request.getSession(true).setAttribute("local", "ru");
+		}
+		String commndName;
 		Command command;
-
+		String page;
 		try {
-			commandName = request.getParameter(COMMAND_NAME);
-			command = commandHelper.getCommand(commandName);
-			command.execute(request, response);
-		} catch (CommandException e) {
-			request.getSession().invalidate();
-			request.getRequestDispatcher(PageName.ERROR_PAGE).toString();
+			commndName = request.getParameter(COMMAND_NAME);
+			command = commandHelper.getCommand(commndName);
+			page = command.execute(request, response);
 
+		} catch (CommandException e) {
+			page = PageName.ERROR_PAGE;
+		}
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+		if (dispatcher != null) {
+			try {
+				dispatcher.forward(request, response);
+			} catch (ServletException e) {
+			} catch (IOException e) {
+			}
 		}
 	}
+//		String commandName;
+//		Command command;
+//		try {
+//			commandName = request.getParameter(COMMAND_NAME);
+//			command = commandHelper.getCommand(commandName);
+//			command.execute(request, response);
+//		} catch (CommandException e) {
+//			request.getSession().invalidate();
+//			request.getRequestDispatcher(PageName.ERROR_PAGE).toString();
+//		}
+//	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		if (request.getSession(true).getAttribute("local") == null){
 			request.getSession(true).setAttribute("local", "ru");
 		}

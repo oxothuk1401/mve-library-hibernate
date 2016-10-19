@@ -22,9 +22,9 @@
 		<servlet-name>Controller</servlet-name>
 		<url-pattern>/Controller</url-pattern>
 	</servlet-mapping>
-	<listener>
-		<listener-class>by.htp.library.listners.DAOlistners</listener-class>
-	</listener>
+	<!--<listener>-->
+		<!--<listener-class>by.htp.library.listners.DAOlistners</listener-class>-->
+	<!--</listener>-->
 	<filter>
 		<display-name>CharsetFilters</display-name>
 		<filter-name>CharsetFilters</filter-name>

@@ -73,10 +73,9 @@ public class Login implements Command {
 		}catch (TransactionException e) {
 			switch (ses.getAttribute("local").toString()) {
 //				!!!!!!!!!!!!!!!!!!!!!!!!!!
-				case "ru": errorMessage = "Transaction error.";break;
+				case "ru": errorMessage = "Ошибка транзакции.";break;
 				case "en": errorMessage = "Transaction error.";break;
 			}
-			log.error(errorMessage +" " +e);
 		} catch (Exception e) {
 			switch (ses.getAttribute("local").toString()) {
 				case "en": errorMessage = "You blocked, contact your administrator!";break;

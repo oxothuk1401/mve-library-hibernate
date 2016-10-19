@@ -22,4 +22,7 @@ public interface UserOperationDAO<T> {
 
     List<T> getAll() throws DAOException;
 
+    List<User> takeUser(String position, String amount) throws DAOException;
+
+    int countAllUsers() throws DAOException;
 }

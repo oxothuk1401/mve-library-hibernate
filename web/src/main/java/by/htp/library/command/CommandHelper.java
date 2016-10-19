@@ -22,6 +22,7 @@ public final class CommandHelper {
 		commands.put(CommandName.DATE, new SearchBook());
 		commands.put(CommandName.DELETE_USER, new DeleteUser());
 		commands.put(CommandName.CHANGE_LOCAL, new ChangeLocal());
+		commands.put(CommandName.SHOW_USERS1, new ShowUsers1());
 //		commands.put(CommandName.RETURN_PAGE, new ReturnPage());
 	}
 
