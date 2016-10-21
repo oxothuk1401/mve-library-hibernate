@@ -11,8 +11,7 @@ public class Logout implements Command {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		request.getSession().invalidate();
-		String page = PageName.INDEX_PAGE;
-		return page;
+		return PageName.INDEX_PAGE;
 	}
 
 }

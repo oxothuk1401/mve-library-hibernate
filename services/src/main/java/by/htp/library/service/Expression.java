@@ -1,12 +1,12 @@
-package by.htp.library.regular_expression;
+package by.htp.library.service;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Expression {
 
-    private static final String LOGIN_VALIDATION = "([a-zA-Z0-9А-Яа-я]+){2,20}";
-    private static final String PASSWORD_VALIDATION = ".{2,30}";
+    private static final String LOGIN_VALIDATION = "([a-zA-Z0-9А-Яа-я]+){4,20}";
+    private static final String PASSWORD_VALIDATION = ".{4,30}";
 
     public static boolean loginValidation(String login) {
         Pattern p = Pattern.compile(LOGIN_VALIDATION);

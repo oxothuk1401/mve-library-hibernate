@@ -43,8 +43,13 @@ public class RegisterService {
 	}
 
 	static class Validator {
+		static Expression expression;
 		public static boolean registerValidator(String login, String password) throws ServiceException {
 			if (login.isEmpty() | password.isEmpty()) {
+				throw new ServiceException();
+			}if(expression.loginValidation(login)){
+				throw new ServiceException();
+			}if(expression.passwordValidation(password)) {
 				throw new ServiceException();
 			}
 			return true;

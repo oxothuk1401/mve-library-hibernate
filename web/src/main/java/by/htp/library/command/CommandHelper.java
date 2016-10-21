@@ -22,7 +22,7 @@ public final class CommandHelper {
 		commands.put(CommandName.DATE, new SearchBook());
 		commands.put(CommandName.DELETE_USER, new DeleteUser());
 		commands.put(CommandName.CHANGE_LOCAL, new ChangeLocal());
-//		commands.put(CommandName.RETURN_PAGE, new ReturnPage());
+		commands.put(CommandName.RETURN_PAGE, new ReturnPage());
 	}
 
 	public Command getCommand(String commandName) {

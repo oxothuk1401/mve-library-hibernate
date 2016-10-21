@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class Login implements Command {
+	private final static String PREVIOUS_PAGE = "previousPage";
 	private static final String LOGIN = "login";
 	private static final String PASSWORD = "password";
 	private static Logger log = Logger.getLogger(Login.class.getName());
@@ -33,24 +34,26 @@ public class Login implements Command {
 				ses.setAttribute("login", user);
 				ses.setAttribute("role", user.getRole());
 				request.setAttribute("login", user.getLogin());
-				sb.append("http://127.0.0.1:8080/Library/Controller?command=login&login=");
+//				sb.append("http://127.0.0.1:8080/Library/Controller?command=login&login=");
+				sb.append("Controller?command=login&login=");
 				sb.append(request.getParameter(LOGIN));
 				sb.append("&password=");
 				sb.append(request.getParameter(PASSWORD));
 				url = sb.toString();
-				ses.setAttribute("userPage", url);
+				ses.setAttribute(PREVIOUS_PAGE, url);
 				page = PageName.USER_PAGE;
 				break;
 			case "admin":
 				ses.setAttribute("login", user);
 				ses.setAttribute("role", user.getRole());
 				request.setAttribute("login", user.getLogin());
-				sb.append("http://127.0.0.1:8080/Library/Controller?command=login&login=");
+				sb.append("Controller?command=login&login=");
+//				sb.append("http://127.0.0.1:8080/Library/Controller?command=login&login=");
 				sb.append(request.getParameter(LOGIN));
 				sb.append("&password=");
 				sb.append(request.getParameter(PASSWORD));
 				url = sb.toString();
-				ses.setAttribute("userPage", url);
+				ses.setAttribute(PREVIOUS_PAGE, url);
 				page = PageName.ADMIN_PAGE;
 				break;
 			default:
@@ -63,13 +66,11 @@ public class Login implements Command {
 			case "en": errorMessage = "Please, enter your login and password";break;
 			case "ru": errorMessage = "Пожалуйста, введите ваш логин и пароль";break;
 			}
-			log.info(errorMessage +" " +e);
 		} catch (DAOException e) {
 			switch (ses.getAttribute("local").toString()) {
 			case "en": errorMessage = "Login or password entered is not correct!";break;
 			case "ru": errorMessage = "Логин или пароль введены не правильно!";break;
 			}
-			log.info(errorMessage +" " +e);
 		}catch (TransactionException e) {
 			switch (ses.getAttribute("local").toString()) {
 //				!!!!!!!!!!!!!!!!!!!!!!!!!!

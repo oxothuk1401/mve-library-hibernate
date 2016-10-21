@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class SearchBook implements Command {
+    private final static String PREVIOUS_PAGE = "previousPage";
     private static final String SEARCHING = "searching";
     private static final String COMMAND = "command";
     private static final String SORTED = "sorted";
@@ -37,7 +38,6 @@ public class SearchBook implements Command {
             }
         } catch (ServiceException e) {
             switch (session.getAttribute("local").toString()) {
-//                case "ru": errorMessage = "Ничего не введено"; break;
                 case "en": errorMessage = "Do not enter anything."; break;
                 case "ru": errorMessage = "Ничего не введено."; break;
             }
@@ -60,24 +60,3 @@ public class SearchBook implements Command {
         return page;
     }
 }
-
-
-//    @Override
-//    public String execute(HttpServletRequest request, HttpServletResponse response) {
-//        HttpSession ses = request.getSession(true);
-//        String page = null;
-//        List<Book> searchBook = null;
-//        TreeSet<String> set = null;
-//        JspSet jsp = null;
-//        String errorMessage = null;
-//        try {
-//            searchBook = SearchService.checkSearch(request.getParameter(SEARCHING));
-//            if (searchBook != null) {
-//                set = new TreeSet<>();
-//                for (int i = 0; i < searchBook.size(); i++) {
-//                    set.add(searchBook.get(i).getTitle() + "  " + searchBook.get(i).getAuthor() + "  " + searchBook.get(i).getAccess());
-//                }
-//                jsp = new JspSet(set);
-//                request.setAttribute("userbean", jsp);
-//                page = PageName.SEARCH_BOOK;
-//            }

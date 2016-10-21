@@ -22,12 +22,17 @@
     <fmt:message bundle="${loc}" key="local.id" var="id"/>
     <fmt:message bundle="${loc}" key="local.role" var="role"/>
     <fmt:message bundle="${loc}" key="local.blacklist" var="blackList"/>
+    <fmt:message bundle="${loc}" key="local.tomain" var="tomain"/>
     <jsp:useBean id="userbean" class="by.htp.library.jsp_bean.JSPUserBean" scope="request"/>
 </head>
 <body>
 <table width="500" border="0" align="center" cellspacing="0" cellpadding="10">
     <tr>
         <td width="100" align="left" height="50">
+            <form action="Controller" method="post">
+                <input type="hidden" name="command" value="return-page">
+                <input type="submit" value="${tomain}"/>
+            </form><br>
             <form action="Controller" method="post">
                 ${enterUsername}
                 <input type="text" name="user" size="20" value=""><br>

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class RegisterUserForm implements Command {
-
+	private final static String PREVIOUS_PAGE = "previousPage";
 	private static final String LOGIN = "login";
 	private static final String PASSWORD = "password";
 
@@ -28,13 +28,13 @@ public class RegisterUserForm implements Command {
 					request.getParameter(PASSWORD));
 			if (newUser !=null) {
 				ses.setAttribute(LOGIN, newUser);
-				ses.setAttribute("userPage", PageName.INDEX_PAGE);
+				ses.setAttribute(PREVIOUS_PAGE, PageName.INDEX_PAGE);
 				switch (ses.getAttribute("local").toString()) {
 				case "ru": str = "Вы успешно зарегистрированы. Авторизуйтесь."; break;
 				case "en": str = "You have successfully registered.Log in."; break;
 				}
 				request.setAttribute("message", str);
-				page = (String) ses.getAttribute("userPage");
+				page = PageName.INDEX_PAGE;
 			}
 		} catch (ServiceException e) {
 			switch (ses.getAttribute("local").toString()) {

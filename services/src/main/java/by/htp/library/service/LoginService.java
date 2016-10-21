@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.TransactionException;
 
+
 public final class LoginService {
     private static Logger log = Logger.getLogger(LoginService.class.getName());
 
@@ -41,8 +42,14 @@ public final class LoginService {
         }
     }
     static class Validator {
+        static Expression expression;
+
         public static boolean loginValidator(String login, String password) throws ServiceException {
             if (login.isEmpty() | password.isEmpty()) {
+                throw new ServiceException();
+            }if(expression.loginValidation(login)){
+                throw new ServiceException();
+            }if(expression.passwordValidation(password)) {
                 throw new ServiceException();
             }
             return true;

@@ -47,17 +47,6 @@ public class Controller extends HttpServlet {
 			}
 		}
 	}
-//		String commandName;
-//		Command command;
-//		try {
-//			commandName = request.getParameter(COMMAND_NAME);
-//			command = commandHelper.getCommand(commandName);
-//			command.execute(request, response);
-//		} catch (CommandException e) {
-//			request.getSession().invalidate();
-//			request.getRequestDispatcher(PageName.ERROR_PAGE).toString();
-//		}
-//	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
