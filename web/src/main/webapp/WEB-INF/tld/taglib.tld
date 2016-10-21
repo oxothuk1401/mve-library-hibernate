@@ -7,23 +7,33 @@
 	<short-name> mytag </short-name>
 	<uri> /WEB-INF/tld/taglib.tld </uri>
 	<tag>
-		<name> jspset </name>
-		<tag-class>by.htp.library.controller.jspTeg.DrawingTableTag </tag-class>
+		<name> showUsersTag </name>
+		<tag-class>by.htp.library.jsp_teg.JSPShowUsersTag</tag-class>
 		<body-content> empty </body-content>
 		<attribute>
-			<name> set </name>
+			<name> jspUserBean </name>
 			<required> false </required>
 			<rtexprvalue> true </rtexprvalue>
 		</attribute>
 	</tag>
 	<tag>
-		<name> jspset2 </name>
-		<tag-class>by.htp.library.controller.jspTeg.BookListTag </tag-class>
+		<name> paginTag </name>
+		<tag-class>by.htp.library.jsp_teg.JSPPaginTag</tag-class>
 		<body-content> empty </body-content>
 		<attribute>
-			<name> set </name>
+			<name> jspUserBean </name>
 			<required> false </required>
 			<rtexprvalue> true </rtexprvalue>
 		</attribute>
 	</tag>
+	<!--<tag>-->
+		<!--<name> jspset2 </name>-->
+		<!--<tag-class>by.htp.library.jsp_teg.BookListTag</tag-class>-->
+		<!--<body-content> empty </body-content>-->
+		<!--<attribute>-->
+			<!--<name> set </name>-->
+			<!--<required> false </required>-->
+			<!--<rtexprvalue> true </rtexprvalue>-->
+		<!--</attribute>-->
+	<!--</tag>-->
 </taglib>

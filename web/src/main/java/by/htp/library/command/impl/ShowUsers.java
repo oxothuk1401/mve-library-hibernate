@@ -4,49 +4,48 @@ import by.htp.library.command.Command;
 import by.htp.library.controller.PageName;
 import by.htp.library.dao.exception.DAOException;
 import by.htp.library.entity.User;
+import by.htp.library.jsp_bean.JSPUserBean;
+import by.htp.library.service.CountAllUsers;
 import by.htp.library.service.ShowUsersService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * Created by oxothuk1401 on 18.10.2016.
+ */
 public class ShowUsers implements Command {
+    private String POSITION = "position";
+    private String AMOUNT = "amount";
+    private static Logger log = Logger.getLogger(Login.class.getName());
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = null;
-        HttpSession session = request.getSession();
-        List<User> list = null;
+        HttpSession ses = request.getSession(true);
+        String page = PageName.ERROR_PAGE;
+        String errorMessage = null;
+        int position = Integer.parseInt(request.getParameter(POSITION));
+        int amount = Integer.parseInt(request.getParameter(AMOUNT));
+        int countAllUsers = CountAllUsers.countAllUsers();
+        List<User> listUsers = null;
         try {
-            list = ShowUsersService.showUsers();
-        } catch (DAOException e) {
-            e.getMessage();
+            listUsers = ShowUsersService.showUsers(request.getParameter(POSITION), request.getParameter(AMOUNT));
+            if (listUsers != null) {
+                JSPUserBean jspUserBean = new JSPUserBean(listUsers, countAllUsers, amount, position);
+                request.setAttribute("countAllUsers", countAllUsers);
+                request.setAttribute("userbean", jspUserBean);
+                return PageName.SHOW_USERS;
+            }
+        }catch (DAOException e){
+            switch (ses.getAttribute("local").toString()) {
+                case "en": errorMessage = "Error connection with Data Base";break;
+                case "ru": errorMessage = "Ошибка соединения с базой данных";break;
+            }
         }
-        request.setAttribute("userbean", list);
-        return PageName.SHOW_USERS;
+        request.setAttribute("errorMessage", errorMessage);
+        return page;
     }
 }
-//        List<User> list = new ArrayList<>();
-//        String page = null;
-//        TreeSet<Object> set = null;
-//        JspSet jsp = null;
-//        try {
-//            list = ShowUsersService.showUsers();
-//        } catch (DAOException e) {
-//            e.getStackTrace();
-//        }
-//
-//        if (list != null) {
-//            set = new TreeSet<>();
-//            for (int i = 0; i < list.size(); i++) {
-//                    set.add(list.get(i).getLogin());
-//            }
-//            jsp = new JspSet(set);
-//            request.setAttribute("userbean", jsp);
-//            return page = PageName.SHOW_USERS;
-//        }
-//
-//        return page;
-//    }
-//}

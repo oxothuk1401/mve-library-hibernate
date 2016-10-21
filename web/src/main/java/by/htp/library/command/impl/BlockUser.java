@@ -30,8 +30,8 @@ public class BlockUser implements Command {
             user = UserServiceOperation.userOperation(request.getParameter(USER), request.getParameter(COMMAND));
             if (user != null) {
                 switch (request.getSession(true).getAttribute("local").toString()) {
-                    case "ru":errorMessage = "Пользователь " + request.getParameter(USER).toString() + " заблокирован успешно"; break;
-                    case "en": errorMessage = "User " + request.getParameter(USER).toString() + " is blocked successfully"; break;
+                    case "ru":errorMessage = "Пользователь <=  " + request.getParameter(USER).toString() + "  =>  заблокирован успешно"; break;
+                    case "en": errorMessage = "User <=  " + request.getParameter(USER).toString() + "  =>  is blocked successfully"; break;
                 }
             }
         } catch (DAOException e) {

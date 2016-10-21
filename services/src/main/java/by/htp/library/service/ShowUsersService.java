@@ -16,7 +16,7 @@ import java.util.List;
 public final class ShowUsersService {
     private static Logger log = Logger.getLogger(ShowUsersService.class.getName());
 
-    public final static List<User> showUsers() throws DAOException {
+    public final static List<User> showUsers(String position, String amount) throws DAOException {
         List result = null;
         Factory factory = Factory.getInstance();
         UserOperationDAO userOperationDAO = factory.getUserOperationDAO();
@@ -24,7 +24,7 @@ public final class ShowUsersService {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            result = userOperationDAO.getAll();
+            result = userOperationDAO.takeUser(position,amount);
             transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null) {

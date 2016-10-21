@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -21,7 +22,6 @@ public class DBBookOperationDAO extends OperationDAO implements BookOperationDAO
     public List getAll() throws DAOException {
         try {
             Session session = HibernateUtil.getSession();
-            log.error("getAllBooks sesion = " + session.hashCode());
             Query query = session.createQuery("from Book");
             List<Book> listBooks = (List<Book>) query.list();
             if (listBooks == null) {
@@ -39,7 +39,8 @@ public class DBBookOperationDAO extends OperationDAO implements BookOperationDAO
             List<Book> resault = null;
             Session session = HibernateUtil.getSession();
             Criteria criteria = session.createCriteria(getPersistentClass());
-            criteria.add(Restrictions.like(command, searching + "%"));
+            criteria.add(Restrictions.like(command, searching, MatchMode.ANYWHERE));
+//            criteria.add(Restrictions.like(command, searching + "%"));
             criteria.addOrder(Order.asc(sorted));
             resault = criteria.list();
             if (resault == null) {

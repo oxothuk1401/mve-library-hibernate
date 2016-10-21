@@ -25,7 +25,10 @@
     <fmt:message bundle="${loc}" key="local.amount" var="amount"/>
     <fmt:message bundle="${loc}" key="local.sorting" var="sorting"/>
     <fmt:message bundle="${loc}" key="local.searchin" var="searchin"/>
-    <fmt:message bundle="${loc}" key="local.searchresultbook" var="searchresultbook"/>
+    <fmt:message bundle="${loc}" key="local.showall" var="showAllNotise"/>
+    <fmt:message bundle="${loc}" key="local.5notes" var="fiveNotes"/>
+    <fmt:message bundle="${loc}" key="local.10notes" var="tenNotes"/>
+    <fmt:message bundle="${loc}" key="local.20notes" var="twentyNotes"/>
 </head>
 <body>
 <table width="1100" border="0" align="center" cellspacing="0" cellpadding="5">
@@ -83,21 +86,26 @@
 
         </td>
     </tr>
-    <tr>
-        <td width="220" align="left" height=0>
-            <form action="Controller" method="post">
-                <input type="hidden" name="command" value="show-users">
-                <input type="submit" value="${viewusers}"/>
-            </form>
-        </td>
-    </tr>
+    <%--<tr>--%>
+        <%--<td width="220" align="left" height=0>--%>
+            <%--<form action="Controller" method="post">--%>
+                <%--<input type="hidden" name="command" value="show-users">--%>
+                <%--<input type="submit" value="${viewusers}"/>--%>
+            <%--</form>--%>
+        <%--</td>--%>
+    <%--</tr>--%>
     <tr>
         <td width="220" align="left" height=0>
             <form action="Controller" method="get">
-                <input type="hidden" name="command" value="show-users1">
+                <input type="hidden" name="command" value="show-users">
                 <input type="hidden" name="position" value="0">
-                <input type="hidden" name="amount" value="3">
-                <input type="submit" value="SHOWUSERSPANGIN"/>
+                <select name="amount" size="1">
+                    <option selected value="999">${showAllNotise}
+                    <option value="5">${fiveNotes}
+                    <option value="10">${tenNotes}
+                    <option value="20">${twentyNotes}
+                </select>
+                <input type="submit" value="${viewusers}"/>
             </form>
         </td>
     </tr>

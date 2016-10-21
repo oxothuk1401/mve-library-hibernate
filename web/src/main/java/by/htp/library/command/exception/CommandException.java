@@ -1,4 +1,4 @@
-package by.htp.library.controller.exception;
+package by.htp.library.command.exception;
 
 public class CommandException extends Exception {
 	private static final long serialVersionUID = 1L;

@@ -30,8 +30,8 @@ public class UnLockUser implements Command {
             user = UserServiceOperation.userOperation(request.getParameter(USER), request.getParameter(COMMAND));
             if (user != null) {
                 switch (request.getSession(true).getAttribute("local").toString()) {
-                    case "ru": errorMessage = "Пользователь " + request.getParameter(USER).toString() + " разблокирован успешно";  break;
-                    case "en": errorMessage = "User " + request.getParameter(USER).toString() + " is unlock successfully"; break;
+                    case "ru": errorMessage = "Пользователь <=  " + request.getParameter(USER).toString() + "  =>  разблокирован успешно";  break;
+                    case "en": errorMessage = "User <=  " + request.getParameter(USER).toString() + "  =>  is unlock successfully"; break;
                 }
             }
         } catch (DAOException e) {

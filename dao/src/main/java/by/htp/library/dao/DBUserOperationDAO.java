@@ -7,7 +7,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.exception.SQLGrammarException;
-import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -101,14 +100,10 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
     public List<User> takeUser(String position, String amount) throws DAOException {
         try {
             Session session = HibernateUtil.getSession();
-            log.error("getAllUsers sesion = " + session.hashCode());
             Criteria criteria = session.createCriteria(getPersistentClass());
-            log.info(Integer.valueOf(position));
-            log.info(Integer.valueOf(amount));
             criteria.setFirstResult(Integer.valueOf(position));
             criteria.setMaxResults(Integer.valueOf(amount));
             List<User> listUsers = criteria.list();
-            log.info(listUsers);
             if (listUsers == null) {
                 throw new DAOException("List of users is empty");
             }
@@ -124,22 +119,6 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
         List<User> userList = criteria.list();
         int countAllUsers = userList.size();
         return countAllUsers;
-    }
-
-    @Override
-    public List getAll() throws DAOException {
-        try {
-            Session session = HibernateUtil.getSession();
-            log.error("getAllUsers sesion = " + session.hashCode());
-            Query query = session.createQuery("from User");
-            List<User> listUsers = (List<User>) query.list();
-            if (listUsers == null) {
-                throw new DAOException("List of users is empty");
-            }
-            return listUsers;
-        } catch (Exception e) {
-            throw new DAOException("Error accessing database");
-        }
     }
 
     @Override

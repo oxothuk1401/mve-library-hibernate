@@ -20,8 +20,6 @@ public interface UserOperationDAO<T> {
 
     User unLockUser(String user) throws DAOException;
 
-    List<T> getAll() throws DAOException;
-
     List<User> takeUser(String position, String amount) throws DAOException;
 
     int countAllUsers() throws DAOException;

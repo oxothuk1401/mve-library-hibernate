@@ -13,6 +13,5 @@ public enum CommandName {
 	SHOW_USERS, DELETE_USER, BLOCK_USER, UNLOCK_USER,
 
 	RETURN_PAGE,
-	SHOW_USERS1
 
 }
