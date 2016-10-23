@@ -12,6 +12,7 @@
     <fmt:message bundle="${loc}" key="local.registerUserLibrary" var="registerUserLibrary"/>
     <fmt:message bundle="${loc}" key="local.Phone" var="Phone"/>
     <fmt:message bundle="${loc}" key="local.enterpassword" var="enterpassword"/>
+    <fmt:message bundle="${loc}" key="local.enterlogin" var="enterlogin"/>
     <fmt:message bundle="${loc}" key="local.yourgender" var="yourgender"/>
     <fmt:message bundle="${loc}" key="local.male" var="male"/>
     <fmt:message bundle="${loc}" key="local.female" var="female"/>
@@ -31,29 +32,23 @@
 <table width="300" border="0" align="center" cellspacing="0" cellpadding="10">
     <tr bgcolor="#F2F2F2">
         <td align="center" width="300" height="85">
-            <form action="Controller" method="post">
+            <form action="Controller" method="post" onsubmit="return TestLoginAndPassRegistr(this.login.value, this.password.value);">
                 <input type="hidden" name="command" value="register-user-form">
                 <table border="0" cellspacing="1" cellpadding="1">
+                    <tr><td><input type="text" name="login" size="25" placeholder=${enterlogin}></td></tr>
+                    <tr><td><input type="password" name="password" size="25" placeholder=${enterpassword}></td></tr>
+                    <script src = "assets/loginPassword.js"></script>
                     <tr>
-                        <td align="left"><c:out value="${login}"/></td>
-                        <td><input type="text" name="login" size="16"></td>
-                    </tr>
-                    <tr>
-                        <td align="left"><c:out value="${enterpassword}"/></td>
-                        <td><input type="password" name="password" size="17"></td>
-                    </tr>
-                    <tr>
-                        <td align="right"><c:out value="${yourgender}"/></td>
                         <td>
-                            <input type="radio" name="sex" value="man" checked> <c:out value="${male}"/><br>
-                            <input type="radio" name="sex" value="woman"> <c:out value="${female}"/>
+                        <c:out value="${yourgender}"/>
+                        <input type="radio" name="sex" value="man" checked> <c:out value="${male}"/>
+                        <input type="radio" name="sex" value="woman"> <c:out value="${female}"/>
                         </td>
                     </tr>
                     <tr>
                         <td align="center" colspan="2">
                             <input type="submit" name="submit" value="<c:out value="${send}" />">
                             <input type="reset" name="reset" value="<c:out value="${clear}" />">
-
                         </td>
                     </tr>
                 </table>

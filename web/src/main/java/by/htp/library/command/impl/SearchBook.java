@@ -5,7 +5,6 @@ import by.htp.library.controller.PageName;
 import by.htp.library.dao.exception.DAOException;
 import by.htp.library.entity.Book;
 import by.htp.library.service.SearchService;
-import by.htp.library.service.exception.ServiceException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,15 +34,6 @@ public class SearchBook implements Command {
                 }else{
                     page = PageName.USER_PAGE;
                 }
-            }
-        } catch (ServiceException e) {
-            switch (session.getAttribute("local").toString()) {
-                case "en": errorMessage = "Do not enter anything."; break;
-                case "ru": errorMessage = "Ничего не введено."; break;
-            }
-            switch (session.getAttribute("role").toString()) {
-                case "admin":  page = PageName.ADMIN_PAGE; break;
-                case "user": page = PageName.USER_PAGE; break;
             }
         } catch (DAOException e) {
             switch (session.getAttribute("local").toString()) {

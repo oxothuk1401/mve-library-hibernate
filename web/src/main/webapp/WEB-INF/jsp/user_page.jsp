@@ -22,6 +22,7 @@
     <fmt:message bundle="${loc}" key="local.amount" var="amount"/>
     <fmt:message bundle="${loc}" key="local.sorting" var="sorting"/>
     <fmt:message bundle="${loc}" key="local.searchin" var="searchin"/>
+    <fmt:message bundle="${loc}" key="local.entersearch" var="entersearch"/>
 </head>
 <body>
 
@@ -43,7 +44,8 @@
     <tr bgcolor="">
         <pre>                                                  ${searchin}         ${sorting}</pre>
         <td width="1100" border="0" align="center" height="10">
-            <form action="Controller" method="post">
+            <form action="Controller" method="post" onsubmit="return TestSearch(this.searching.value)">
+                <script src = "assets/search.js"></script>
                 <input type="submit" value="${search}"/>
                 <select name="command" size="1">
                     <option selected value="author">${author}
@@ -55,7 +57,7 @@
                     <option value="title">${title}
                     <option value="date">${date}
                 </select>
-                <input type="text" name="searching" size="90" value=""><br>
+                <input type="text" name="searching" size="90" value="" placeholder=${entersearch}><br>
             </form>
             <c:out value="${requestScope.errorMessage}"/>
             <c:out value="${requestScope.message}"/>

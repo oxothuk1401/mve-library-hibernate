@@ -5,7 +5,6 @@ import by.htp.library.controller.PageName;
 import by.htp.library.dao.exception.DAOException;
 import by.htp.library.entity.User;
 import by.htp.library.service.RegisterService;
-import by.htp.library.service.exception.ServiceException;
 import org.hibernate.TransactionException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,11 +34,6 @@ public class RegisterUserForm implements Command {
 				}
 				request.setAttribute("message", str);
 				page = PageName.INDEX_PAGE;
-			}
-		} catch (ServiceException e) {
-			switch (ses.getAttribute("local").toString()) {
-			case "ru": errorMessage = "Пожалуйста заполните все поля.";break;
-			case "en": errorMessage = "Please complete all fields.";break;
 			}
 		} catch (DAOException e) {
 			switch (ses.getAttribute("local").toString()) {

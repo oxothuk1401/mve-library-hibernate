@@ -34,7 +34,6 @@ public class Login implements Command {
 				ses.setAttribute("login", user);
 				ses.setAttribute("role", user.getRole());
 				request.setAttribute("login", user.getLogin());
-//				sb.append("http://127.0.0.1:8080/Library/Controller?command=login&login=");
 				sb.append("Controller?command=login&login=");
 				sb.append(request.getParameter(LOGIN));
 				sb.append("&password=");
@@ -48,7 +47,6 @@ public class Login implements Command {
 				ses.setAttribute("role", user.getRole());
 				request.setAttribute("login", user.getLogin());
 				sb.append("Controller?command=login&login=");
-//				sb.append("http://127.0.0.1:8080/Library/Controller?command=login&login=");
 				sb.append(request.getParameter(LOGIN));
 				sb.append("&password=");
 				sb.append(request.getParameter(PASSWORD));
@@ -63,8 +61,8 @@ public class Login implements Command {
 			}
 		} catch (ServiceException e) {
 			switch (ses.getAttribute("local").toString()) {
-			case "en": errorMessage = "Please, enter your login and password";break;
-			case "ru": errorMessage = "Пожалуйста, введите ваш логин и пароль";break;
+			case "en": errorMessage = "You blocked, contact your administrator!";break;
+			case "ru": errorMessage = "Вы заблокированы обратитесь к администратору!";break;
 			}
 		} catch (DAOException e) {
 			switch (ses.getAttribute("local").toString()) {
@@ -76,11 +74,6 @@ public class Login implements Command {
 //				!!!!!!!!!!!!!!!!!!!!!!!!!!
 				case "ru": errorMessage = "Ошибка транзакции.";break;
 				case "en": errorMessage = "Transaction error.";break;
-			}
-		} catch (Exception e) {
-			switch (ses.getAttribute("local").toString()) {
-				case "en": errorMessage = "You blocked, contact your administrator!";break;
-				case "ru": errorMessage = "Вы заблокированы обратитесь к администратору!";break;
 			}
 		}
 		request.setAttribute("errorMessage", errorMessage);

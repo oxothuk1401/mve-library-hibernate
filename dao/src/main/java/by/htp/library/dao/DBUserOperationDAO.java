@@ -20,7 +20,6 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
     public User checkLogin(String login, String password) throws DAOException {
         User user;
         Session session = HibernateUtil.getSession();
-        log.info("session_chekLogin_DB = " + session.hashCode());
         Criteria criteria = session.createCriteria(getPersistentClass());
         criteria.add(Restrictions.eq("login", login));
         criteria.add(Restrictions.eq("password", MD5.getMD5(password)));
@@ -35,7 +34,6 @@ public class DBUserOperationDAO extends OperationDAO implements UserOperationDAO
     public User checkRegister(String login, String password) throws DAOException {
         Session session = HibernateUtil.getSession();
         Criteria criteria = session.createCriteria(getPersistentClass());
-        log.info("session_checkRegister_DB = " + session.hashCode());
         criteria.add(Restrictions.eq("login", login));
         if (criteria.uniqueResult() != null) {
             throw new DAOException();

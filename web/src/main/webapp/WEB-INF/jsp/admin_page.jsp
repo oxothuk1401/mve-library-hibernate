@@ -29,6 +29,7 @@
     <fmt:message bundle="${loc}" key="local.5notes" var="fiveNotes"/>
     <fmt:message bundle="${loc}" key="local.10notes" var="tenNotes"/>
     <fmt:message bundle="${loc}" key="local.20notes" var="twentyNotes"/>
+    <fmt:message bundle="${loc}" key="local.entersearch" var="entersearch"/>
 </head>
 <body>
 <table width="1100" border="0" align="center" cellspacing="0" cellpadding="5">
@@ -49,7 +50,8 @@
     <tr bgcolor="">
         <pre>                                                  ${searchin} ${sorting}</pre>
         <td width="1100" border="0" align="center" height="10">
-            <form action="Controller" method="post">
+            <form action="Controller" method="post" onsubmit="return TestSearch(this.searching.value)">
+                <script src = "assets/search.js"></script>
                 <input type="submit" value="${search}"/>
                 <select name="command" size="1">
                     <option selected value="author">${author}
@@ -61,7 +63,7 @@
                     <option value="title">${title}
                     <option value="date">${date}
                 </select>
-                <input type="text" name="searching" size="90" value=""><br>
+                <input type="text" name="searching" size="90" value="" placeholder=${entersearch}><br>
             </form>
             <c:out value="${requestScope.errorMessage}"/>
         </td>
@@ -86,21 +88,13 @@
 
         </td>
     </tr>
-    <%--<tr>--%>
-        <%--<td width="220" align="left" height=0>--%>
-            <%--<form action="Controller" method="post">--%>
-                <%--<input type="hidden" name="command" value="show-users">--%>
-                <%--<input type="submit" value="${viewusers}"/>--%>
-            <%--</form>--%>
-        <%--</td>--%>
-    <%--</tr>--%>
     <tr>
         <td width="220" align="left" height=0>
             <form action="Controller" method="get">
                 <input type="hidden" name="command" value="show-users">
                 <input type="hidden" name="position" value="0">
                 <select name="amount" size="1">
-                    <option selected value="999">${showAllNotise}
+                    <option selected value="1000000">${showAllNotise}
                     <option value="5">${fiveNotes}
                     <option value="10">${tenNotes}
                     <option value="20">${twentyNotes}

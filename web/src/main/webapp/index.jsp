@@ -39,12 +39,11 @@
 	<table width="300" border="0" align="center" cellspacing="0" cellpadding="10">
 			<tr bgcolor="#F2F2F2">
 			<td align="center" width="50" height="85">
-				<form action="Controller" method="post">
+				<form action="Controller" method="post" onsubmit="return TestLoginAndPass(this.login.value, this.password.value);">
 					<input type="hidden" name="command" value="login" />
-					<c:out value="${login}" />	<br /> 
-					<input type="text" name="login" size="15" value="" /> <br />
-					<c:out value="${password}" /> <br />
-					<input type="password" name="password" size="17" value="" /><br /> 
+					<input type="text" name="login" size="15" value="" placeholder=${login}> <br />
+					<input type="password" name="password" size="15" value="" placeholder=${password}><br />
+                    <script src = "assets/loginPassword.js"></script>
 					<input type="submit" value="${login_button}" />
 				</form>
 				<form  action="Controller"  method="post">
